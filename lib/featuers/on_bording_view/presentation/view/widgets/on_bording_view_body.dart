@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/constant.dart';
+import 'package:market_e_comerc_app/core/function/app_router.dart';
+import 'package:market_e_comerc_app/core/widgets/coustem_elveted_boutten.dart';
 import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/login_vew.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/widgets/coustem_indecator.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/widgets/screan_one.dart';
@@ -32,30 +35,25 @@ class _OnBordingViewBodyState extends State<OnBordingViewBody> {
                 });
               },
               controller: _controller,
-              children: [ScreanOne(), ScreanTwo(), ScreanThree(), LoginVew()],
+              children: [ScreanOne(), ScreanTwo(), ScreanThree()],
             ),
           ),
 
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: () {
+          CoustemElvetedBoutten(
+            text: index >= 2 ? "Get Started" : 'Next',
+            onPressed: () {
+              if (index >= 2) {
+                GoRouter.of(context).push(AppRouter.KlogIn);
+                setState(() {});
+              } else {
                 _controller.animateToPage(
                   index + 1,
+                
                   duration: Duration(milliseconds: 250),
                   curve: Curves.linear,
                 );
-                setState(() {});
-              },
-              child: Text('Next', style: TextStyle(color: Colors.white)),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: KprimaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-              ),
-            ),
+              }
+            },
           ),
           SizedBox(height: 11),
         ],

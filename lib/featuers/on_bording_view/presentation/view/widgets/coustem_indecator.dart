@@ -11,8 +11,8 @@ class CoustemIndecator extends StatelessWidget {
         borderRadius: BorderRadius.circular(180),
         color: active ? const Color.fromARGB(255, 6, 41, 70) : Colors.blue[100],
       ),
-      width: 15,
-      height: 15,
+      width: active? 15:13,
+      height:  active? 15:13,
     );
   }
 }
