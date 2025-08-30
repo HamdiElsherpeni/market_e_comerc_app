@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/constant.dart';
-import 'package:market_e_comerc_app/core/function/app_assets.dart';
-import 'package:market_e_comerc_app/core/function/app_router.dart';
+import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_elveted_boutten.dart';
-import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/widgets/coustem_text_form_feaild.dart';
-import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/widgets/coutem_app_bar_forget.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/coustem_text_form_feaild.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/coutem_app_bar_forget.dart';
 
 class ForgetPassBody extends StatelessWidget {
   const ForgetPassBody({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_e_comerc_app/core/function/app_assets.dart';
+import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/widgets/coustem_indecator.dart';
 
 class ScreanOne extends StatelessWidget {

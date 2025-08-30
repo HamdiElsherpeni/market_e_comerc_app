@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/constant.dart';
-import 'package:market_e_comerc_app/core/function/app_router.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_elveted_boutten.dart';
-import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/login_vew.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/view/login_vew.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/widgets/coustem_indecator.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/widgets/screan_one.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/widgets/screan_three.dart';

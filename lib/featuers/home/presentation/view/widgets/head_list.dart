@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_e_comerc_app/core/function/app_styls.dart';
+import 'package:market_e_comerc_app/core/utlis/app_styls.dart';
 
 class HeadList extends StatelessWidget {
   const HeadList({super.key, required this.headName, this.onPressed});

@@ -1,7 +1,7 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_e_comerc_app/core/function/app_assets.dart';
-import 'package:market_e_comerc_app/core/function/app_styls.dart';
+import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
+import 'package:market_e_comerc_app/core/utlis/app_styls.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_avatar.dart';
 import "package:flutter/material.dart";
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_image.dart';

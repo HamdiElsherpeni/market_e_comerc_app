@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_e_comerc_app/core/function/app_router.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/featuers/splash_view/presentation/view/splash_view.dart';
 
 void main() {

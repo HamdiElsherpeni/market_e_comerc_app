@@ -3,7 +3,7 @@ import 'package:market_e_comerc_app/constant.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/view/cart_view.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/home_view_body.dart';
-import 'package:market_e_comerc_app/featuers/my_brofile/presentation/view/widgets/menu_screen.dart';
+import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/menu_screen.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({super.key});

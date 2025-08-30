@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_e_comerc_app/core/function/app_assets.dart';
-import 'package:market_e_comerc_app/core/function/app_router.dart';
+import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});

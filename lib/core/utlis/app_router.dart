@@ -7,11 +7,11 @@ import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/best
 import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/popouler_product_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/product_more.dart';
-import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/forget_pass.dart';
-import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/login_vew.dart';
-import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/sinup_view.dart';
-import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/widgets/forget_pass_body_email.dart';
-import 'package:market_e_comerc_app/featuers/my_brofile/presentation/view/my_profile_view.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/view/forget_pass.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/view/login_vew.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/view/sinup_view.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/forget_pass_body_email.dart';
+import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/my_profile_view.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/on_bording_view.dart';
 import 'package:market_e_comerc_app/featuers/splash_view/presentation/view/splash_view.dart';
 
