@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/constant.dart';
 import 'package:market_e_comerc_app/core/function/app_router.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/view/cart_view.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/favorite_view.dart';
+import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/barnds_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/category_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/coustem_app_bar_home_view.dart';

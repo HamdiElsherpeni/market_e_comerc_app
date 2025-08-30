@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:market_e_comerc_app/constant.dart';
 import 'package:market_e_comerc_app/core/function/app_assets.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/coustem_circle_image.dart';
+import 'package:market_e_comerc_app/core/widgets/coustem_circle_image.dart';
 
 class CoustemAppBarHomeView extends StatelessWidget {
   const CoustemAppBarHomeView({super.key, this.urlImage, this.name});

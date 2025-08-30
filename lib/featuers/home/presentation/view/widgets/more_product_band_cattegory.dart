@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/category_item.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/proudct_abb_bar.dart';
+import 'package:market_e_comerc_app/core/widgets/proudct_abb_bar.dart';
 
 class MoreProductBandCattegory extends StatelessWidget {
   const MoreProductBandCattegory({super.key, required this.titel});

@@ -4,13 +4,14 @@ import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/all_
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/all_category_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/bay_again.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/best_for_you_view.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/favorite_view.dart';
+import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/popouler_product_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/product_more.dart';
 import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/forget_pass.dart';
 import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/login_vew.dart';
 import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/sinup_view.dart';
 import 'package:market_e_comerc_app/featuers/login_and_sinup/presentation/view/widgets/forget_pass_body_email.dart';
+import 'package:market_e_comerc_app/featuers/my_brofile/presentation/view/my_profile_view.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/on_bording_view.dart';
 import 'package:market_e_comerc_app/featuers/splash_view/presentation/view/splash_view.dart';
 
@@ -27,6 +28,8 @@ class AppRouter {
   static String KFavie = '/bestforyou';
   static String KBrands = '/bbrands';
   static String KCtegory = '/category';
+  static String KMyProfile = '/myprofile';
+
 
 
 
@@ -113,6 +116,12 @@ class AppRouter {
         path: KHomeView,
         builder: (context, state) {
           return HomeView();
+        },
+      ),
+      GoRoute(
+        path: KMyProfile,
+        builder: (context, state) {
+          return MyProfileView();
         },
       ),
        

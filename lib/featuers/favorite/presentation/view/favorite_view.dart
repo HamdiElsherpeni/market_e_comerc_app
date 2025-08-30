@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_e_comerc_app/featuers/favorite/presentation/view/widgets/favorite_view_body.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/product_more.dart';
 
 class FavoriteView extends StatelessWidget {
@@ -6,6 +7,6 @@ class FavoriteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProductMore(titel: 'Favorites');
+    return FavoriteViewBody();
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:market_e_comerc_app/constant.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/view/cart_view.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/favorite_view.dart';
+import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/home_view_body.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/menu_screen.dart';
+import 'package:market_e_comerc_app/featuers/my_brofile/presentation/view/widgets/menu_screen.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({super.key});
@@ -36,7 +36,7 @@ class _HomeViewState extends State<HomeView> {
        endDrawer: SizedBox(
         width: MediaQuery.of(context).size.width * 0.7, // نص الشاشة
         child: Drawer(
-          child: MenuScreen(),
+          child: MenuScreen(name: 'Hamdi',),
         ),
       ),
       body: _screens[_selectedIndex],
