@@ -2,6 +2,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceManager {
   static const String _tokenKey = 'auth_token';
+  static const String _emialKey = 'email';
+
   static const String _userNameKey = 'user_name';
   static const String _userId = 'user_id';
   static const String _localeKey = 'app_locale';
@@ -19,6 +21,51 @@ class SharedPreferenceManager {
     print('[DEBUG] Loaded user name: $userName');
     return userName;
   }
+
+
+
+
+static Future<void> saveEmail(String email) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_emialKey, email);
+    print('[DEBUG] Saved email: $email');
+  }
+
+  static Future<String?> getEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    final email = prefs.getString(_emialKey);
+    print('[DEBUG] Loaded email: $email');
+    return email;
+  }
+
+  static Future<void> clearEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_emialKey);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   static Future<void> clearUserName() async {
     final prefs = await SharedPreferences.getInstance();

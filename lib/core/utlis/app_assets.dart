@@ -7,5 +7,7 @@ class AppAssets {
       'assets/images/Illustration_Forgot_Password_With_Phone.png';
   static String hamdi = 'assets/images/hamdi.jpg';
   static String offers = 'assets/images/offers.jpg';
+  static String otpImage = 'assets/images/Illustration_Verification_Code_With_Phone.png';
+
 
 }

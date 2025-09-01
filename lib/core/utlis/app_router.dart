@@ -1,12 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/repos/reset_pass_repo/reset_pass_repo_implement.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/repos/sinin_repo/sinin_repo.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/repos/sinin_repo/sinin_repo_implement.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/repos/sinup_repo/sinup_repo.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/repos/sinup_repo/sinup_repo_impelemnt.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/services/auth_services.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/manger/reset_pass_cubit/reset_pass_cubit.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/manger/sinin_cubit/sin_in_cubit.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/manger/sinup_cubit/sin_up_cubit.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/otp_view_body.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/home_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/all_barands_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/all_category_list_view.dart';
@@ -37,6 +41,7 @@ class AppRouter {
   static String KBrands = '/bbrands';
   static String KCtegory = '/category';
   static String KMyProfile = '/myprofile';
+  static String KOtpView = '/otpvire';
 
   static GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -44,6 +49,12 @@ class AppRouter {
         path: '/',
         builder: (context, state) {
           return const SplashView();
+        },
+      ),
+      GoRoute(
+        path: KOtpView,
+        builder: (context, state) {
+          return OtpVerificationScreen(phoneNumber: state.extra as String);
         },
       ),
       GoRoute(
@@ -112,7 +123,12 @@ class AppRouter {
       GoRoute(
         path: KForgetpassEmail,
         builder: (context, state) {
-          return ForgetPassBodyEmail();
+          return BlocProvider(
+            create: (context) => ResetPassCubit(
+              ResetPassRepoImplement(authServices: AuthServices()),
+            ),
+            child: ForgetPassBodyEmail(),
+          );
         },
       ),
       GoRoute(

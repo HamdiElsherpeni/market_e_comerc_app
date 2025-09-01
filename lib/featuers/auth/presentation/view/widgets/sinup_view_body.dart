@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
 import 'package:market_e_comerc_app/core/utlis/app_router.dart';
+import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_avatar.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_elveted_boutten.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/services/auth_services.dart';
@@ -33,7 +34,7 @@ class _SinupViewBodyState extends State<SinupViewBody> {
   bool _isPasswordObscure = true;
   bool _isConfirmPasswordObscure = true;
 
-  void _onSignUp(BuildContext context) {
+  void _onSignUp(BuildContext context) async{
     if (_formKey.currentState!.validate()) {
       context.read<SinUpCubit>().sinupFuture(
         name: nameController.text.trim(),
@@ -41,6 +42,8 @@ class _SinupViewBodyState extends State<SinupViewBody> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
         confirmPassword: confirmPasswordController.text.trim(),
+   
+
       );
     }
   }
@@ -204,6 +207,7 @@ class _SinupViewBodyState extends State<SinupViewBody> {
               BlocConsumer<SinUpCubit, SinUpState>(
                 listener: (context, state) {
                   if (state is SinUpISucsess) {
+                    
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(

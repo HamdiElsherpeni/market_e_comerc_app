@@ -2,9 +2,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:market_e_comerc_app/core/utlis/api_constant.dart';
 import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/models/reset_password_by_email_model/reset_pass_request.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/sinin_model/sin_in_request.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/sinin_model/sin_in_response.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/sinup_models/sin_uo_response.dart';
+
+import '../models/reset_password_by_email_model/reset_pass_response.dart';
 
 class AuthServices {
   final Dio _dio = Dio();
@@ -67,7 +70,21 @@ class AuthServices {
     // حفظ البيانات في SharedPreferences
     await SharedPreferenceManager.saveName(signInResponse.name);
     await SharedPreferenceManager.saveToken(signInResponse.token);
+    
+
 
     return signInResponse;
+  }
+
+  Future<ResetPassResponse> sendResetPasswordEmail(
+     final String email,
+  ) async {
+    var data= json.encode({'email':email});
+    var response = await _dio.post(
+      ApiConstant.resetPassword,
+      options: Options(headers: {'Content-Type': 'application/json'}),
+      data: data,
+    );
+    return ResetPassResponse.fromJson(response.data);
   }
 }
