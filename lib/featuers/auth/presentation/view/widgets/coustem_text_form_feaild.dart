@@ -11,8 +11,8 @@ class CoustemTextFormFeaild extends StatelessWidget {
     this.obscureText = false,
   });
 
-  final Icon? preIcon;
-  final Icon? sufIcon;
+  final Widget? preIcon; // ✨ غيرناها من Icon? → Widget?
+  final Widget? sufIcon; // ✨ غيرناها من Icon? → Widget?
   final String? txtHint;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -30,7 +30,7 @@ class CoustemTextFormFeaild extends StatelessWidget {
         strutStyle: const StrutStyle(height: 0),
         decoration: InputDecoration(
           prefixIcon: preIcon,
-          suffixIcon: sufIcon,
+          suffixIcon: sufIcon, // ✨ دلوقتي يقبل IconButton أو Icon
           hintText: txtHint,
           hintStyle: const TextStyle(fontSize: 10),
           enabledBorder: OutlineInputBorder(

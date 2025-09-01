@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_avatar.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_elveted_boutten.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/services/auth_services.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/manger/sinup_cubit/sin_up_cubit.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/coustem_text_form_feaild.dart';
 
 class SinupViewBody extends StatefulWidget {
@@ -25,21 +28,20 @@ class _SinupViewBodyState extends State<SinupViewBody> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  AuthServices authServices = AuthServices();
+  
 
-  void _signUp() async {
+  bool _isPasswordObscure = true;
+  bool _isConfirmPasswordObscure = true;
+
+  void _onSignUp(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      // ✅ هنا البيانات مظبوطة
-      final response = await authServices.signUp(
+      context.read<SinUpCubit>().sinupFuture(
         name: nameController.text.trim(),
         phone: phoneController.text.trim(),
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
         confirmPassword: confirmPasswordController.text.trim(),
       );
-
-      print("📌 Response: $response");
-      // تقدر تعمل SnackBar أو تنقل شاشة
     }
   }
 
@@ -57,7 +59,7 @@ class _SinupViewBodyState extends State<SinupViewBody> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CoustemCircleAvatar(
-                    icon: Icon(FontAwesomeIcons.arrowLeft),
+                    icon: const Icon(FontAwesomeIcons.arrowLeft),
                     onPressed: () {
                       GoRouter.of(context).pop();
                     },
@@ -71,9 +73,12 @@ class _SinupViewBodyState extends State<SinupViewBody> {
               ),
 
               // 🔹 Name
-              Text("Your name", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              const Text(
+                "Your name",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
               CoustemTextFormFeaild(
-                preIcon: Icon(Icons.person_outline_outlined),
+                preIcon: const Icon(Icons.person_outline_outlined),
                 txtHint: 'Full Name',
                 controller: nameController,
                 validator: (val) =>
@@ -81,9 +86,12 @@ class _SinupViewBodyState extends State<SinupViewBody> {
               ),
 
               // 🔹 Username
-              Text("User name", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              const Text(
+                "User name",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
               CoustemTextFormFeaild(
-                preIcon: Icon(Icons.person_outline_outlined),
+                preIcon: const Icon(Icons.person_outline_outlined),
                 txtHint: 'Username',
                 controller: usernameController,
                 validator: (val) =>
@@ -91,9 +99,12 @@ class _SinupViewBodyState extends State<SinupViewBody> {
               ),
 
               // 🔹 Phone
-              Text("Phone number", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              const Text(
+                "Phone number",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
               CoustemTextFormFeaild(
-                preIcon: Icon(Icons.phone_iphone_outlined),
+                preIcon: const Icon(Icons.phone_iphone_outlined),
                 txtHint: '+20 1501142409 ',
                 controller: phoneController,
                 validator: (val) =>
@@ -101,9 +112,12 @@ class _SinupViewBodyState extends State<SinupViewBody> {
               ),
 
               // 🔹 Email
-              Text("Email", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              const Text(
+                "Email",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
               CoustemTextFormFeaild(
-                preIcon: Icon(Icons.email_outlined),
+                preIcon: const Icon(Icons.email_outlined),
                 txtHint: 'You@gmail.com',
                 controller: emailController,
                 validator: (val) {
@@ -114,34 +128,108 @@ class _SinupViewBodyState extends State<SinupViewBody> {
               ),
 
               // 🔹 Password
-              Text("Password", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              const Text(
+                "Password",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
               CoustemTextFormFeaild(
-                preIcon: Icon(Icons.lock_outline_rounded),
+                preIcon: const Icon(Icons.lock_outline_rounded),
                 txtHint: '****************',
-                sufIcon: Icon(Icons.visibility_off, size: 17),
                 controller: passwordController,
-                validator: (val) =>
-                    val != null && val.length < 6 ? "Password too short" : null,
+                obscureText: _isPasswordObscure,
+                sufIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordObscure
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    size: 17,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordObscure = !_isPasswordObscure;
+                    });
+                  },
+                ),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Password is required";
+                  }
+                  if (val.length < 6) {
+                    return "Password must be at least 6 characters";
+                  }
+                  if (!RegExp(r'[A-Z]').hasMatch(val)) {
+                    return "Password must contain at least one uppercase letter";
+                  }
+                  if (!RegExp(r'[a-z]').hasMatch(val)) {
+                    return "Password must contain at least one lowercase letter";
+                  }
+                  if (!RegExp(r'[0-9]').hasMatch(val)) {
+                    return "Password must contain at least one number";
+                  }
+                  return null;
+                },
               ),
 
               // 🔹 Confirm Password
-              Text("Confirm Password", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              const Text(
+                "Confirm Password",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
               CoustemTextFormFeaild(
-                preIcon: Icon(Icons.lock_outline_rounded),
+                preIcon: const Icon(Icons.lock_outline_rounded),
                 txtHint: '****************',
-                sufIcon: Icon(Icons.visibility_off, size: 17),
                 controller: confirmPasswordController,
+                obscureText: _isConfirmPasswordObscure,
+                sufIcon: IconButton(
+                  icon: Icon(
+                    _isConfirmPasswordObscure
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    size: 17,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isConfirmPasswordObscure = !_isConfirmPasswordObscure;
+                    });
+                  },
+                ),
                 validator: (val) => val != passwordController.text
                     ? "Passwords do not match"
                     : null,
               ),
 
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
 
-              // 🔹 Button
-              CoustemElvetedBoutten(
-                text: "Sign Up",
-                onPressed: _signUp,
+              // 🔹 زرار التسجيل مع Bloc
+              BlocConsumer<SinUpCubit, SinUpState>(
+                listener: (context, state) {
+                  if (state is SinUpISucsess) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          " تم التسجيل بنجاح اذهب وفعل الايميل لتسجيل الدخول ✅",
+                        ),
+                      ),
+                    );
+                    GoRouter.of(context).pushReplacement(AppRouter.KlogIn);
+                  } else if (state is SinUpIFailer) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(state.errorMassge),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is SinUpILoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return CoustemElvetedBoutten(
+                    text: "Sign Up",
+                    onPressed: () => _onSignUp(context),
+                  );
+                },
               ),
             ],
           ),

@@ -13,7 +13,7 @@ class SignUpRequest {
     required this.confirmPassword,
   });
 
-  // لتحويل من JSON إلى Object
+ 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) {
     return SignUpRequest(
       name: json['name'],
@@ -23,7 +23,7 @@ class SignUpRequest {
       confirmPassword: json['confirmPassword'],
     );
   }
-  // لتحويل من Object إلى JSON
+  
   Map<String, dynamic> toJson() {
     return {
       "name": name,

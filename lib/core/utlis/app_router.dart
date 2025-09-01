@@ -1,4 +1,12 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/repos/sinin_repo/sinin_repo.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/repos/sinin_repo/sinin_repo_implement.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/repos/sinup_repo/sinup_repo.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/repos/sinup_repo/sinup_repo_impelemnt.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/services/auth_services.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/manger/sinin_cubit/sin_in_cubit.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/manger/sinup_cubit/sin_up_cubit.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/home_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/all_barands_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/all_category_list_view.dart';
@@ -30,14 +38,6 @@ class AppRouter {
   static String KCtegory = '/category';
   static String KMyProfile = '/myprofile';
 
-
-
-
-
-
-
-
-
   static GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
@@ -46,37 +46,37 @@ class AppRouter {
           return const SplashView();
         },
       ),
-       GoRoute(
+      GoRoute(
         path: KBrands,
         builder: (context, state) {
           return AllBarandsListView();
         },
       ),
-       GoRoute(
+      GoRoute(
         path: KCtegory,
         builder: (context, state) {
           return AllCategoryListView();
         },
       ),
-       GoRoute(
+      GoRoute(
         path: KFavie,
         builder: (context, state) {
           return FavoriteView();
         },
       ),
-       GoRoute(
+      GoRoute(
         path: KBestFor,
         builder: (context, state) {
           return BestForYouView();
         },
       ),
-       GoRoute(
+      GoRoute(
         path: KBuyAgain,
         builder: (context, state) {
           return BayAgain();
         },
       ),
-       GoRoute(
+      GoRoute(
         path: KPopuler,
         builder: (context, state) {
           return PopoulerProductView();
@@ -97,7 +97,10 @@ class AppRouter {
       GoRoute(
         path: KSinUp,
         builder: (context, state) {
-          return SinupView();
+          return BlocProvider(
+            create: (context) => SinUpCubit(SinupRepoImpelemnt(AuthServices())),
+            child: SinupView(),
+          );
         },
       ),
       GoRoute(
@@ -124,7 +127,6 @@ class AppRouter {
           return MyProfileView();
         },
       ),
-       
     ],
   );
 }
