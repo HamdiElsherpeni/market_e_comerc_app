@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
+import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
+import 'package:market_e_comerc_app/featuers/auth/presentation/manger/active_reset_cubit/active_reset_cubit.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  final String phoneNumber;
+  final String email;
 
-  const OtpVerificationScreen({super.key, required this.phoneNumber});
+  const OtpVerificationScreen({super.key, required this.email});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
-  TextEditingController otpController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController otpController = TextEditingController();
   int seconds = 60; // مدة العداد
   late final ticker;
 
@@ -20,6 +25,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   void initState() {
     super.initState();
     startTimer();
+  }
+
+  void _activeRest(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      context.read<ActiveResetCubit>().futureActiveReset(
+        email: widget.email,
+        code: otpController.text.trim(),
+      );
+    }
   }
 
   void startTimer() {
@@ -61,42 +75,42 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           children: [
             const SizedBox(height: 20),
             // صورة توضيحية
-            Image.asset(AppAssets.otpImage, height: 200),
+            Image.asset(AppAssets.otpImage, height: 150),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Text(
               "Please enter the 4 digit code sent to:",
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 5),
             Text(
-              widget.phoneNumber,
+              widget.email,
               style: const TextStyle(
                 color: Colors.blue,
                 fontWeight: FontWeight.bold,
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
 
             // إدخال الكود
             PinCodeTextField(
               appContext: context,
               controller: otpController,
-              length: 4,
+              length: 6,
               keyboardType: TextInputType.number,
               animationType: AnimationType.fade,
               pinTheme: PinTheme(
                 shape: PinCodeFieldShape.box,
                 borderRadius: BorderRadius.circular(10),
-                fieldHeight: 60,
-                fieldWidth: 50,
+                fieldHeight: 40,
+                fieldWidth: 20,
                 activeFillColor: Colors.white,
               ),
               onChanged: (value) {},
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: verifyCode,
               style: ElevatedButton.styleFrom(
@@ -106,7 +120,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               child: const Text("Verify Code"),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Text(
               "00:${seconds.toString().padLeft(2, '0')}",
               style: const TextStyle(fontSize: 16, color: Colors.black54),
@@ -122,9 +136,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   });
                 }
               },
-              child: const Text(
-                "Resend Code",
-                style: TextStyle(color: Colors.blue),
+              child: TextButton(
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
+                child: Text(
+                  "Resend Code",
+                  style: TextStyle(color: Colors.blue),
+                ),
               ),
             ),
           ],

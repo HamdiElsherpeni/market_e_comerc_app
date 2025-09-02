@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:market_e_comerc_app/core/utlis/api_constant.dart';
 import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/models/active_reset_password/active_reset_password_request.dart';
+import 'package:market_e_comerc_app/featuers/auth/data/models/active_reset_password/active_reset_password_response.dart'
+    show ResetPasswordMessageResponse;
 import 'package:market_e_comerc_app/featuers/auth/data/models/reset_password_by_email_model/reset_pass_request.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/sinin_model/sin_in_request.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/sinin_model/sin_in_response.dart';
@@ -70,21 +73,33 @@ class AuthServices {
     // حفظ البيانات في SharedPreferences
     await SharedPreferenceManager.saveName(signInResponse.name);
     await SharedPreferenceManager.saveToken(signInResponse.token);
-    
-
 
     return signInResponse;
   }
 
-  Future<ResetPassResponse> sendResetPasswordEmail(
-     final String email,
-  ) async {
-    var data= json.encode({'email':email});
+  Future<ResetPassResponse> sendResetPasswordEmail(final String email) async {
+    var data = json.encode({'email': email});
     var response = await _dio.post(
-      ApiConstant.resetPassword,
+      ApiConstant.sendPassEmail,
       options: Options(headers: {'Content-Type': 'application/json'}),
       data: data,
     );
     return ResetPassResponse.fromJson(response.data);
+  }
+
+  Future<ActiveResetModelResponse> activateResetPassword({
+    required String email,
+    required String code,
+  }) async {
+    var headers = {'Content-Type': 'application/json'};
+
+    var data = json.encode({"email": email, "code": code});
+
+    var response = await _dio.request(
+      ApiConstant.activResetPassEmail,
+      options: Options(method: 'POST', headers: headers),
+      data: data,
+    );
+    return ActiveResetModelResponse.fromJson(response.data);
   }
 }

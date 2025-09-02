@@ -2,10 +2,11 @@ class ApiConstant {
   static const String _baseUrl = 'https://marketi-app.onrender.com/api/v1/';
   static const String sinUp = '${_baseUrl}auth/signUp';
   static const String sinIn = '${_baseUrl}auth/signIn';
-  static const String sendPassworEmail = '${_baseUrl}auth/sendPassEmail';
-  static const String activeResetPassword = '${_baseUrl}auth/activeResetPass';
 
-  static const String resetPassword = '${_baseUrl}auth/resetPassword';
+  static const String sendPassEmail = '${_baseUrl}auth/sendPassEmail';
+  static const String activResetPassEmail = '${_baseUrl}auth/activeResetPass';
+  static const String createNewPassEmail = '${_baseUrl}auth/resetPassword';
+
   static const String products = '${_baseUrl}home/products';
   static const String brands = '${_baseUrl}home/brands';
   static const String categores = '${_baseUrl}ome/categories';

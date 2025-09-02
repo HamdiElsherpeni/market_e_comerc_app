@@ -28,6 +28,7 @@ class ForgetPassBodyEmail extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -81,7 +82,7 @@ class ForgetPassBodyEmail extends StatelessWidget {
                             );
                             GoRouter.of(context).pushReplacement(
                               AppRouter.KOtpView,
-                              extra: _emailControler,
+                              extra:  _emailControler.text.trim(),
                             );
                           } else if (state is ResetPassFalier) {
                             ScaffoldMessenger.of(context).showSnackBar(
