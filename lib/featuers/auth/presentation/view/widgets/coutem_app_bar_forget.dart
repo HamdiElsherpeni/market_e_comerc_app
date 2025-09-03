@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_avatar.dart';
 
 class CoutemAppBarForget extends StatelessWidget {
-  const CoutemAppBarForget({super.key});
-
+  const CoutemAppBarForget({super.key, required this.text});
+final String text;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -17,7 +17,7 @@ class CoutemAppBarForget extends StatelessWidget {
           },
         ),
         SizedBox(width: 20),
-        Text('Forget Password'),
+        Text(text),
       ],
     );
   }

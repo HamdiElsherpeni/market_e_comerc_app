@@ -19,7 +19,7 @@ class ForgetPassBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            CoutemAppBarForget(),
+            CoutemAppBarForget(text: 'Forget Password',),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -5,6 +5,7 @@ import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/active_reset_password/active_reset_password_request.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/active_reset_password/active_reset_password_response.dart'
     show ResetPasswordMessageResponse;
+import 'package:market_e_comerc_app/featuers/auth/data/models/create_new_pass_model/create_new_pass_response.dart' show CreateNewPassResponse;
 import 'package:market_e_comerc_app/featuers/auth/data/models/reset_password_by_email_model/reset_pass_request.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/sinin_model/sin_in_request.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/sinin_model/sin_in_response.dart';
@@ -102,4 +103,29 @@ class AuthServices {
     );
     return ActiveResetModelResponse.fromJson(response.data);
   }
+  Future<CreateNewPassResponse> createNewPassword({
+  required String email,
+  required String password,
+  required String confirmPassword,
+}) async {
+  var headers = {'Content-Type': 'application/json'};
+
+  var data = json.encode({
+    "email": email,
+    "password": password,
+    "confirmPassword": confirmPassword,
+  });
+
+  var response = await _dio.request(
+    ApiConstant.createNewPassEmail, // ضيف المسار بتاع الـ API في ApiConstant
+    options: Options(
+      method: 'POST',
+      headers: headers,
+    ),
+    data: data,
+  );
+
+  return CreateNewPassResponse.fromJson(response.data);
+}
+
 }
