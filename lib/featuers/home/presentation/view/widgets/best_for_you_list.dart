@@ -24,9 +24,9 @@ class BestForYouList extends StatelessWidget {
                 child: CoustemProdectItem(
                   image:
                       'https://tse1.mm.bing.net/th/id/OIP.j1sMPSP-emIbWhpgbf50zQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
-                  rate: 22,
+                  
                   name: '',
-                  price: state.topSearch[index].number ?? 0,
+                  price: state.topSearch[index].number ?? 0, id:state.topSearch[index].id??'',
                 ),
               );
             },

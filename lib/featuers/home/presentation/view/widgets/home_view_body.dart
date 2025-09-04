@@ -92,7 +92,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         GoRouter.of(context).push(AppRouter.KProuductAll);
                       },
                     ),
-                    SizedBox(height: 140, child: PopularProductListView()),
+                    SizedBox(height: 180, child: PopularProductListView()),
                     SizedBox(height: 9),
                     HeadList(
                       headName: 'Category',
@@ -108,7 +108,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         GoRouter.of(context).push(AppRouter.KBestFor);
                       },
                     ),
-                    SizedBox(height: 140, child: BestForYouList()),
+                    SizedBox(height: 180, child: BestForYouList()),
                     SizedBox(height: 2),
                     HeadList(
                       headName: 'Brands',
@@ -124,7 +124,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         GoRouter.of(context).push(AppRouter.KBuyAgain);
                       },
                     ),
-                    SizedBox(height: 140, child: PopularProductListView()),
+                    SizedBox(height: 180, child: PopularProductListView()),
                   ],
                 ),
               ),

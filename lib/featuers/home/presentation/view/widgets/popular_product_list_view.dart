@@ -24,9 +24,10 @@ class PopularProductListView extends StatelessWidget {
                   image:
                       state.prodducts[index].images?[0] ??
                       'https://tse1.mm.bing.net/th/id/OIP.j1sMPSP-emIbWhpgbf50zQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
-                  rate: state.prodducts[index].rating,
+
                   name: "m,mm",
                   price: state.prodducts[index].price ?? 0,
+                  id: state.prodducts[index].id ?? '',
                 ),
               );
             },

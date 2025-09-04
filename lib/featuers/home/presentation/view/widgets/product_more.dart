@@ -21,14 +21,17 @@ class ProductMore extends StatelessWidget {
                 child: BlocBuilder<PopulerProductCubit, PopulerProductState>(
                   builder: (context, state) {
                     return GridView.builder(
-                      itemCount: 20,
+                      itemCount: state.props.length,
 
                       itemBuilder: (context, index) {
                        if (state is PopulerProducSucsess)
                        {
-                         return CoustemProdectItem(image:  state.prodducts[index].images?[0] ??
-                      'https://tse1.mm.bing.net/th/id/OIP.j1sMPSP-emIbWhpgbf50zQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
-                  name:'', price:state.prodducts[index].price??0,);
+                         return Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: CoustemProdectItem(image:  state.prodducts[index].images?[0] ??
+                                                 'https://tse1.mm.bing.net/th/id/OIP.j1sMPSP-emIbWhpgbf50zQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+                                             name:'', price:state.prodducts[index].price??0, id:state.prodducts[index].id??'',),
+                         );
                        }
                       },
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

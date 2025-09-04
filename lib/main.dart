@@ -5,6 +5,11 @@ import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/repos/sinin_repo/sinin_repo_implement.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/services/auth_services.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/manger/sinin_cubit/sin_in_cubit.dart';
+import 'package:market_e_comerc_app/featuers/cart/data/cart_services/cart_services.dart';
+import 'package:market_e_comerc_app/featuers/cart/data/repos/cart_repo_implementation.dart';
+import 'package:market_e_comerc_app/featuers/cart/presentation/manger/add_product_cubit/add_product_cubit_cubit.dart';
+import 'package:market_e_comerc_app/featuers/cart/presentation/manger/delet_product_cubit/delet_proudcut_cubit_cubit.dart';
+import 'package:market_e_comerc_app/featuers/cart/presentation/manger/get_product_cubit/get_product_cubit_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,8 +25,18 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SinInCubit(SininRepoImplement(AuthServices())),
         ),
+        BlocProvider(create: (context) => AppCubitCubit()),
         BlocProvider(
-          create: (context) => AppCubitCubit(),
+          create: (context) =>
+              GetProductCubitCubit(CartRepoImplementation(CartServices())),
+        ),
+        BlocProvider(
+          create: (context) =>
+              AddProductCubitCubit(CartRepoImplementation(CartServices())),
+        ),
+        BlocProvider(
+          create: (context) =>
+              DeletProudcutCubitCubit(CartRepoImplementation(CartServices())),
         ),
       ],
       child: BlocBuilder<AppCubitCubit, AppCubitState>(
@@ -32,7 +47,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark().copyWith(
               scaffoldBackgroundColor: Colors.black,
-              
+
               textTheme: const TextTheme(
                 bodyLarge: TextStyle(color: Colors.white),
                 bodyMedium: TextStyle(color: Colors.white70),

@@ -1,18 +1,17 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:market_e_comerc_app/featuers/cart/data/models/delet_product_model/delet_respons.dart';
+import 'package:market_e_comerc_app/featuers/favorite/data/models/add_favi/add_favi_response.dart';
+import 'package:market_e_comerc_app/featuers/favorite/data/models/delet_favi/delet_favi_response.dart';
 
 import '../../../../core/utlis/api_constant.dart';
 import '../../../../core/utlis/shared_preferences.dart';
-import '../models/add/addprudut_cart_respons.dart';
-import '../models/get_cart/get_cart_response.dart';
 
-class CartServices {
+class ServicesFavi {
   final Dio _dio = Dio();
   final SharedPreferenceManager sharedPreferenceManager =
       SharedPreferenceManager();
-  Future<AddToCartResponse> addToCart({required String productId}) async {
+  Future<AddFaviResponse> addToCart({required String productId}) async {
     final token = await SharedPreferenceManager.getToken();
     var headers = {
       'Content-Type': 'application/json',
@@ -22,15 +21,15 @@ class CartServices {
     var data = json.encode({"productId": productId});
 
     var response = await _dio.request(
-      ApiConstant.addCart, // ضيف المسار بتاع الـ API هنا
+      ApiConstant.addFavorite, // ضيف المسار بتاع الـ API هنا
       options: Options(method: 'POST', headers: headers),
       data: data,
     );
 
-    return AddToCartResponse.fromJson(response.data);
+    return AddFaviResponse.fromJson(response.data);
   }
 
-  Future<DeletRespons> deleteFromCart({required String productId}) async {
+  Future<DeletFaviResponse> deleteFromCart({required String productId}) async {
     final token = await SharedPreferenceManager.getToken();
     var headers = {
       'Content-Type': 'application/json',
@@ -40,23 +39,11 @@ class CartServices {
     var data = json.encode({"productId": productId});
 
     var response = await _dio.request(
-      ApiConstant.deletCart, // ضيف مسار الـ delete هنا
+      ApiConstant.deletFavorite, // ضيف مسار الـ delete هنا
       options: Options(method: 'DELETE', headers: headers),
       data: data,
     );
 
-    return DeletRespons.fromJson(response.data);
-  }
-
-  Future<GetCartResponse> getCart() async {
-    final token = await SharedPreferenceManager.getToken();
-    var headers = {'Authorization': 'Bearer $token'};
-
-    var response = await _dio.request(
-      ApiConstant.getCarrt, // ضيف مسار الـ API في ApiConstant
-      options: Options(method: 'GET', headers: headers),
-    );
-
-    return GetCartResponse.fromJson(response.data);
+    return DeletFaviResponse.fromJson(response.data);
   }
 }

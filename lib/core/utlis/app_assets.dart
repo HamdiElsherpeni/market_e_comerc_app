@@ -11,4 +11,5 @@ class AppAssets {
       'assets/images/Illustration_Verification_Code_With_Phone.png';
   static String concratsImage =
       'assets/images/Illustration_Congratulations.png';
+  static String emptyCarrt = 'assets/images/Illustration_Cart_Empty.png';
 }
