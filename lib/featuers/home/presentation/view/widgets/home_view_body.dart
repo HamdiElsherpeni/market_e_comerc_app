@@ -6,6 +6,7 @@ import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/view/cart_view.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/barnds_list_view.dart';
+import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/best_for_you_list.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/category_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/coustem_app_bar_home_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/head_list.dart';
@@ -35,18 +36,45 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   children: [
                     CoustemAppBarHomeView(),
                     const SizedBox(height: 10),
-                    CoustemTextFormFeaild(
-                      preIcon: const Icon(
-                        FontAwesomeIcons.search,
-                        size: 20,
-                        weight: 200,
+                    GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.KSearchView);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 14,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              FontAwesomeIcons.search,
+                              size: 20,
+                              color: Colors.grey,
+                            ),
+                            const SizedBox(width: 10),
+                            const Text(
+                              "What are you looking for ?",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const Spacer(),
+                            Icon(
+                              Icons.format_list_bulleted_sharp,
+                              color: KprimaryColor,
+                            ),
+                          ],
+                        ),
                       ),
-                      sufIcon: Icon(
-                        Icons.format_list_bulleted_sharp,
-                        color: KprimaryColor,
-                      ),
-                      txtHint: 'What are you looking for ? ',
                     ),
+
                     const SizedBox(height: 14),
                   ],
                 ),
@@ -61,16 +89,17 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     HeadList(
                       headName: 'Popular Product',
                       onPressed: () {
-                        GoRouter.of(context).push(AppRouter.KPopuler);
+                        GoRouter.of(context).push(AppRouter.KProuductAll);
                       },
                     ),
                     SizedBox(height: 140, child: PopularProductListView()),
                     SizedBox(height: 9),
-                    HeadList(headName: 'Category',onPressed: () {
-                        GoRouter.of(
-                          context,
-                        ).push(AppRouter.KCtegory,);
-                      },),
+                    HeadList(
+                      headName: 'Category',
+                      onPressed: () {
+                        GoRouter.of(context).push(AppRouter.KCtegory);
+                      },
+                    ),
                     SizedBox(height: 250, child: CategoryListView()),
                     SizedBox(height: 2),
                     HeadList(
@@ -79,7 +108,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         GoRouter.of(context).push(AppRouter.KBestFor);
                       },
                     ),
-                    SizedBox(height: 140, child: PopularProductListView()),
+                    SizedBox(height: 140, child: BestForYouList()),
                     SizedBox(height: 2),
                     HeadList(
                       headName: 'Brands',

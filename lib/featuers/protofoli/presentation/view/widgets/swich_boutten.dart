@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-class SwichBoutten extends StatefulWidget {
-  final Function(bool)? onChanged; // هنا هنباصي الفنكشن
+class SwitchButton extends StatelessWidget {
+  final bool value;
+  final Function(bool) onChanged;
 
-  const SwichBoutten({Key? key, this.onChanged}) : super(key: key);
-
-  @override
-  _SwichBouttenState createState() => _SwichBouttenState();
-}
-
-class _SwichBouttenState extends State<SwichBoutten> {
-  bool isSwitched = false;
+  const SwitchButton({
+    Key? key,
+    required this.value,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +16,8 @@ class _SwichBouttenState extends State<SwichBoutten> {
       height: 30,
       child: Center(
         child: Switch(
-          value: isSwitched,
-          onChanged: (value) {
-            setState(() {
-              isSwitched = value;
-            });
-
-            if (widget.onChanged != null) {
-              widget.onChanged!(value); // استدعاء الفنكشن اللي مبعوت من برّه
-            }
-          },
+          value: value,
+          onChanged: onChanged,
           activeColor: Colors.blue,
           inactiveThumbColor: Colors.grey,
         ),
@@ -35,4 +25,3 @@ class _SwichBouttenState extends State<SwichBoutten> {
     );
   }
 }
- 

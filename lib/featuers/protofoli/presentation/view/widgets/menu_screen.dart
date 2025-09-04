@@ -11,6 +11,8 @@ class MenuScreen extends StatelessWidget {
   final String name;
   @override
   Widget build(BuildContext context) {
+        final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       children: [
         Container(

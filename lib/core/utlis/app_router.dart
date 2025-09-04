@@ -18,21 +18,31 @@ import 'package:market_e_comerc_app/featuers/auth/presentation/manger/sinup_cubi
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/congratulations_view.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/create_new_pass_view.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/otp_view_body.dart';
+import 'package:market_e_comerc_app/featuers/home/data/home_service/home_services.dart';
+import 'package:market_e_comerc_app/featuers/home/data/repos/brands_repo/brands_repo_impelent.dart';
+import 'package:market_e_comerc_app/featuers/home/data/repos/categores_repo/categores_repo_impelement.dart';
+import 'package:market_e_comerc_app/featuers/home/data/repos/populer_repo/populer_repo_implement.dart';
+import 'package:market_e_comerc_app/featuers/home/presentation/manger_model/brands_cubit/brands_cubit.dart';
+import 'package:market_e_comerc_app/featuers/home/presentation/manger_model/populer_product_cubit/populer_product_cubit.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/home_view.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/all_barands_list_view.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/all_category_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/bay_again.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/best_for_you_view.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
+import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/more_porduct_categores.dart';
+import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/more_product_band.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/popouler_product_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/product_more.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/forget_pass.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/login_vew.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/sinup_view.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/forget_pass_body_email.dart';
+import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/produdct_all_more.dart';
+import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/saerch_view_body.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/my_profile_view.dart';
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/on_bording_view.dart';
 import 'package:market_e_comerc_app/featuers/splash_view/presentation/view/splash_view.dart';
+
+import '../../featuers/home/presentation/manger_model/categores_cubit/categores_cubit.dart';
 
 class AppRouter {
   static String KOnBordong = '/onbording';
@@ -51,8 +61,8 @@ class AppRouter {
   static String KOtpView = '/otpvire';
   static String KCreateNewPass = '/newpass';
   static String KConcrats = '/congrats';
-
-
+  static String KSearchView = '/searchview';
+  static String KProuductAll = '/productall';
 
   static GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -83,6 +93,23 @@ class AppRouter {
         },
       ),
       GoRoute(
+        path: KProuductAll,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) =>
+                PopulerProductCubit(PopulerRepoImplement(HomeServices()))
+                  ..getPopulerProducts(),
+            child: ProdudctAllMore(),
+          );
+        },
+      ),
+      GoRoute(
+        path: KSearchView,
+        builder: (context, state) {
+          return SaerchViewBody();
+        },
+      ),
+      GoRoute(
         path: KConcrats,
         builder: (context, state) {
           return CongratulationsView();
@@ -91,15 +118,25 @@ class AppRouter {
       GoRoute(
         path: KBrands,
         builder: (context, state) {
-          return AllBarandsListView();
+          return BlocProvider(
+            create: (context) =>
+                BrandsCubit(BrandsRepoImpelent(HomeServices()))..getBrands(),
+            child: MoreProductBands(),
+          );
         },
       ),
       GoRoute(
         path: KCtegory,
         builder: (context, state) {
-          return AllCategoryListView();
+          return BlocProvider(
+            create: (context) =>
+                CategoresCubit(CategoresRepoImpelement(HomeServices()))
+                  ..getCtegores(),
+            child: MorePorductCategores(),
+          );
         },
       ),
+
       GoRoute(
         path: KFavie,
         builder: (context, state) {
@@ -115,7 +152,12 @@ class AppRouter {
       GoRoute(
         path: KBuyAgain,
         builder: (context, state) {
-          return BayAgain();
+          return BlocProvider(
+            create: (context) =>
+                PopulerProductCubit(PopulerRepoImplement(HomeServices()))
+                  ..getPopulerProducts(),
+            child: ProdudctAllMore(),
+          );
         },
       ),
       GoRoute(

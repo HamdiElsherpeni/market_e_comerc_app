@@ -22,10 +22,7 @@ class SharedPreferenceManager {
     return userName;
   }
 
-
-
-
-static Future<void> saveEmail(String email) async {
+  static Future<void> saveEmail(String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_emialKey, email);
     print('[DEBUG] Saved email: $email');
@@ -42,30 +39,6 @@ static Future<void> saveEmail(String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_emialKey);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   static Future<void> clearUserName() async {
     final prefs = await SharedPreferences.getInstance();

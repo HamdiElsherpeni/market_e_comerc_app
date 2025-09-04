@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MenuWidget extends StatelessWidget {
+  
   MenuWidget({
     super.key,
     required this.icon,
@@ -13,6 +14,8 @@ class MenuWidget extends StatelessWidget {
   void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
+        final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       children: [
         icon,
@@ -23,8 +26,8 @@ class MenuWidget extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 15,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
+            
+              fontWeight: FontWeight.bold,color: isDark ?Colors.white: Colors.black
             ),
           ),
         ),

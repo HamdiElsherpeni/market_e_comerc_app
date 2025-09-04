@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:market_e_comerc_app/core/app_cubit/cubit/app_cubit_cubit.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
 import 'package:market_e_comerc_app/core/utlis/app_styls.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_image.dart';
@@ -21,6 +23,7 @@ class _MyProfileViewBodyState extends State<MyProfileViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AppCubitCubit>();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -77,8 +80,11 @@ class _MyProfileViewBodyState extends State<MyProfileViewBody> {
                       ),
                     ],
                   ),
-                  SwichBoutten(),
-                ],
+SwitchButton(
+                    value: false,
+                    onChanged: (value){
+                    },
+                  ),                ],
               ),
               Divider(indent: 5, endIndent: 10),
               Row(
@@ -94,7 +100,18 @@ class _MyProfileViewBodyState extends State<MyProfileViewBody> {
                       ),
                     ],
                   ),
-                  SwichBoutten(),
+                  BlocBuilder<AppCubitCubit, AppCubitState>(
+  builder: (context, state) {
+    final cubit = context.read<AppCubitCubit>();
+    return Switch(
+      value: state.themeMode == ThemeMode.dark,
+      onChanged: (value) {
+        cubit.toggleTheme();
+      },
+    );
+  },
+),
+
                 ],
               ),
               Divider(indent: 5, endIndent: 10),

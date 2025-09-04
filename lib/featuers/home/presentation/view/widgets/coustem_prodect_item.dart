@@ -2,16 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
 
 class CoustemProdectItem extends StatefulWidget {
-  CoustemProdectItem({super.key});
+  CoustemProdectItem({
+    super.key,
+    required this.image,
+    final double? rate = 0,
+    required this.name, required this.price,
+  });
+  final String image;
+  final int price;
 
+  final String name;
   @override
   State<CoustemProdectItem> createState() => _CoustemProdectItemState();
 }
 
 class _CoustemProdectItemState extends State<CoustemProdectItem> {
   int favePress = 0;
+
+  _CoustemProdectItemState();
   @override
   Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         Container(
@@ -51,8 +62,8 @@ class _CoustemProdectItemState extends State<CoustemProdectItem> {
                         height: 70,
                         width: 130,
                         color: Colors.blue.shade50,
-                        child: Image.asset(
-                          AppAssets.hamdi, // غيرها حسب صورتك
+                        child: Image.network(
+                          widget.image, // غيرها حسب صورتك
                           height: 60,
                           width: double.infinity,
                           fit: BoxFit.contain,
@@ -91,7 +102,6 @@ class _CoustemProdectItemState extends State<CoustemProdectItem> {
                       onPressed: () {
                         if (favePress == 0) {
                           favePress = 1;
-                          
                         } else {
                           favePress = 0;
                         }
@@ -116,19 +126,26 @@ class _CoustemProdectItemState extends State<CoustemProdectItem> {
                 padding: const EdgeInsets.symmetric(horizontal: 6),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       "799 LE",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
+                        color: isDark ? Colors.black : Colors.black,
                       ),
                     ),
                     Row(
                       children: [
                         Icon(Icons.star_border, size: 13, color: Colors.black),
                         SizedBox(width: 2),
-                        Text("4.9", style: TextStyle(fontSize: 11)),
+                        Text(
+                          " 2.5",
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isDark ? Colors.black : Colors.black,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -136,11 +153,14 @@ class _CoustemProdectItemState extends State<CoustemProdectItem> {
               ),
 
               /// الاسم
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 child: Text(
-                  "Black JBL Airpods",
-                  style: TextStyle(fontSize: 11),
+                  widget.name,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: isDark ? Colors.black : Colors.black,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -149,9 +169,7 @@ class _CoustemProdectItemState extends State<CoustemProdectItem> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
                 child: GestureDetector(
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                   child: Container(
                     height: 24,
                     decoration: BoxDecoration(

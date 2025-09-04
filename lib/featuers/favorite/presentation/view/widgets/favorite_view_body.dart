@@ -20,7 +20,7 @@ class FavoriteViewBody extends StatelessWidget {
                   itemCount: 20,
                   
                   itemBuilder: (context, index) {
-                    return CoustemProdectItem();
+                    // return CoustemProdectItem();
                   },
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
