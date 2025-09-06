@@ -10,7 +10,7 @@ class GetProductCubitCubit extends Cubit<GetProductCubitState> {
   final CartRepo cartRepo;
 
   GetProductCubitCubit(this.cartRepo) : super(GetProductCubitInitial());
-  Future<void> GetProduct({required String productId}) async {
+  Future<void> GetProduct() async {
     emit(GetProductCubitLoading());
     var result = await cartRepo.futureGetCartProduct();
     result.fold(

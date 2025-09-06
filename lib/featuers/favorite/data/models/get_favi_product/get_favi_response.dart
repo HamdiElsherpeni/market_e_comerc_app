@@ -1,4 +1,4 @@
-class GetCartResponse {
+class GetFaviResponse {
   final String id;
   final String title;
   final int price;
@@ -15,7 +15,7 @@ class GetCartResponse {
   final DateTime updatedAt;
   final int v;
 
-  GetCartResponse({
+  GetFaviResponse({
     required this.id,
     required this.title,
     required this.price,
@@ -33,8 +33,8 @@ class GetCartResponse {
     required this.v,
   });
 
-  factory GetCartResponse.fromJson(Map<String, dynamic> json) {
-    return GetCartResponse(
+  factory GetFaviResponse.fromJson(Map<String, dynamic> json) {
+    return GetFaviResponse(
       id: json["_id"],
       title: json["title"],
       price: json["price"],

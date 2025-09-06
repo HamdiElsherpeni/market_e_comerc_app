@@ -9,11 +9,11 @@ class AddProductCubitCubit extends Cubit<AddProductCubitState> {
   final CartRepo cartRepo;
   AddProductCubitCubit(this.cartRepo) : super(AddProductCubitInitial());
   Future<void> addProduct({required String productId}) async {
-    emit(AddProductCubitLoading());
+    emit(AddProductCubitLoading(productId));
     var result = await cartRepo.futureAddProduct(productId: productId);
     result.fold(
       (failer) {
-        emit(AddProductCubitFailer(failer.errorMassge));
+        emit(AddProductCubitFailer(failer.errorMassge,productId));
       },
       (sucsess) {
         emit(AddProductCubitSucsess(sucsess, productId));

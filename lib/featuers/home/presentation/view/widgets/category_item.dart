@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:market_e_comerc_app/core/utlis/app_styls.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, required this.urlImage, required this.name});
+  const CategoryItem({super.key, required this.urlImage,  this.name});
   final String urlImage;
-  final String name;
+  final String? name;
 
   String get fixedUrl {
    
@@ -49,7 +49,7 @@ class CategoryItem extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            name,
+            name??'',
             style: AppStyls.textStyle17.copyWith(color: Colors.black,fontSize: 10),
             maxLines: 1,
           ),

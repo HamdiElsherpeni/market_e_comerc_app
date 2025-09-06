@@ -11,14 +11,20 @@ final class DeletProudcutCubitInitial extends DeletProudcutCubitState {}
 
 final class DeletProudcutCubitFailer extends DeletProudcutCubitState {
   final String errorMassge;
+  final String productId;
 
-  const DeletProudcutCubitFailer(this.errorMassge);
+  const DeletProudcutCubitFailer(this.errorMassge, this.productId);
 }
 
-final class DeletProudcutCubitLoading extends DeletProudcutCubitState {}
+final class DeletProudcutCubitLoading extends DeletProudcutCubitState {
+  final String productId;
+
+ const DeletProudcutCubitLoading(this.productId);
+}
 
 final class DeletProudcutCubitSucsess extends DeletProudcutCubitState {
   final DeletRespons deletRespons;
+  final String productId;
 
-  const DeletProudcutCubitSucsess(this.deletRespons);
+  const DeletProudcutCubitSucsess(this.deletRespons, this.productId);
 }

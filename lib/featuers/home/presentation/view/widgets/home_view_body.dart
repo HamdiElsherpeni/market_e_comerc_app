@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/constant.dart';
 import 'package:market_e_comerc_app/core/utlis/app_router.dart';
+import 'package:market_e_comerc_app/core/widgets/coustem_search_contaner.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/view/cart_view.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/barnds_list_view.dart';
@@ -36,45 +37,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   children: [
                     CoustemAppBarHomeView(),
                     const SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.KSearchView);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 14,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.grey.shade300),
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              FontAwesomeIcons.search,
-                              size: 20,
-                              color: Colors.grey,
-                            ),
-                            const SizedBox(width: 10),
-                            const Text(
-                              "What are you looking for ?",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 14,
-                              ),
-                            ),
-                            const Spacer(),
-                            Icon(
-                              Icons.format_list_bulleted_sharp,
-                              color: KprimaryColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
+                    CoustemSearchContaner(),
                     const SizedBox(height: 14),
                   ],
                 ),

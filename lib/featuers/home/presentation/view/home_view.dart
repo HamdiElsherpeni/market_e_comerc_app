@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_e_comerc_app/constant.dart';
+import 'package:market_e_comerc_app/featuers/cart/data/cart_services/cart_services.dart';
+import 'package:market_e_comerc_app/featuers/cart/data/repos/cart_repo_implementation.dart';
+import 'package:market_e_comerc_app/featuers/cart/presentation/manger/get_product_cubit/get_product_cubit_cubit.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/view/cart_view.dart';
+import 'package:market_e_comerc_app/featuers/favorite/data/repos/favi_repo_impelment.dart';
+import 'package:market_e_comerc_app/featuers/favorite/data/services_favi/services_favi.dart';
+import 'package:market_e_comerc_app/featuers/favorite/presentation/manger/add_favi_cubit/add_favi_cubit.dart';
+import 'package:market_e_comerc_app/featuers/favorite/presentation/manger/delet_favi_cubit/delete_fvie_cubit.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/data/home_service/home_services.dart'
     show HomeServices;
@@ -64,12 +71,24 @@ class _HomeViewState extends State<HomeView> {
               CategoresCubit(CategoresRepoImpelement(HomeServices()))
                 ..getCtegores(),
         ),
+        BlocProvider(
+          create: (context) =>
+              GetProductCubitCubit(CartRepoImplementation(CartServices()))
+                ..GetProduct(),
+        ),
+        BlocProvider(
+          create: (context) => AddFaviCubit(FaviRepoImpelment(ServicesFavi())),
+        ),
+        BlocProvider(
+          create: (context) =>
+              DeleteFvieCubit(FaviRepoImpelment(ServicesFavi())),
+        ),
       ],
       child: Scaffold(
         key: _scaffoldKey,
         endDrawer: SizedBox(
           width: MediaQuery.of(context).size.width * 0.7, // نص الشاشة
-          child: Drawer(child: MenuScreen(name: 'Hamdi')),
+          child: Drawer(child: MenuScreen()),
         ),
         body: _screens[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(

@@ -11,7 +11,7 @@ class ServicesFavi {
   final Dio _dio = Dio();
   final SharedPreferenceManager sharedPreferenceManager =
       SharedPreferenceManager();
-  Future<AddFaviResponse> addToCart({required String productId}) async {
+  Future<AddFaviResponse> addFvieProduct({required String productId}) async {
     final token = await SharedPreferenceManager.getToken();
     var headers = {
       'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ class ServicesFavi {
     return AddFaviResponse.fromJson(response.data);
   }
 
-  Future<DeletFaviResponse> deleteFromCart({required String productId}) async {
+  Future<DeletFaviResponse> deletFvieProduct({required String productId}) async {
     final token = await SharedPreferenceManager.getToken();
     var headers = {
       'Content-Type': 'application/json',
@@ -46,4 +46,24 @@ class ServicesFavi {
 
     return DeletFaviResponse.fromJson(response.data);
   }
+
+    Future<Map<String, dynamic>> getFavi() async {
+    final token = await SharedPreferenceManager.getToken();
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    var response = await _dio.request(
+      ApiConstant.getFavorite,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+
+    // هنا بنحوّل الـ List من الـ API لليست من GetCartResponse
+    return (response.data );}
+       
+
 }

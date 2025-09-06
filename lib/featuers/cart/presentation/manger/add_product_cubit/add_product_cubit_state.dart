@@ -9,7 +9,11 @@ sealed class AddProductCubitState extends Equatable {
 
 final class AddProductCubitInitial extends AddProductCubitState {}
 
-final class AddProductCubitLoading extends AddProductCubitState {}
+final class AddProductCubitLoading extends AddProductCubitState {
+  final String productId;
+
+const  AddProductCubitLoading(this.productId);
+}
 
 final class AddProductCubitSucsess extends AddProductCubitState {
   final AddToCartResponse addToCartResponse;
@@ -20,6 +24,8 @@ final class AddProductCubitSucsess extends AddProductCubitState {
 
 final class AddProductCubitFailer extends AddProductCubitState {
   final String errorMassge;
+  final String productId;
 
-  const AddProductCubitFailer(this.errorMassge);
+
+  const AddProductCubitFailer(this.errorMassge, this.productId);
 }

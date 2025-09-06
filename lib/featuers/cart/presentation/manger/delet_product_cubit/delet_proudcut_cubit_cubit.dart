@@ -11,14 +11,14 @@ class DeletProudcutCubitCubit extends Cubit<DeletProudcutCubitState> {
 
   DeletProudcutCubitCubit(this.cartRepo) : super(DeletProudcutCubitInitial());
   Future<void> deletProduct({required String productId}) async {
-    emit(DeletProudcutCubitLoading());
+    emit(DeletProudcutCubitLoading(productId));
     var result = await cartRepo.futureDeletProduct(productId: productId);
     result.fold(
       (failer) {
-        emit(DeletProudcutCubitFailer(failer.errorMassge));
+        emit(DeletProudcutCubitFailer(failer.errorMassge,productId));
       },
       (sucsess) {
-        emit(DeletProudcutCubitSucsess(sucsess));
+        emit(DeletProudcutCubitSucsess(sucsess,productId));
       },
     );
   }

@@ -4,12 +4,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:market_e_comerc_app/core/app_cubit/cubit/app_cubit_cubit.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
 import 'package:market_e_comerc_app/core/utlis/app_styls.dart';
+import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_image.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/cirecle_arow_boutten.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/coustem_abb_bar_my_profile.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/coustem_profile_image.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/coustem_user_detiles.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/swich_boutten.dart';
+import 'package:restart_app/restart_app.dart';
 
 class MyProfileViewBody extends StatefulWidget {
   MyProfileViewBody({super.key});
@@ -80,11 +82,8 @@ class _MyProfileViewBodyState extends State<MyProfileViewBody> {
                       ),
                     ],
                   ),
-SwitchButton(
-                    value: false,
-                    onChanged: (value){
-                    },
-                  ),                ],
+                  SwitchButton(value: false, onChanged: (value) {}),
+                ],
               ),
               Divider(indent: 5, endIndent: 10),
               Row(
@@ -101,17 +100,16 @@ SwitchButton(
                     ],
                   ),
                   BlocBuilder<AppCubitCubit, AppCubitState>(
-  builder: (context, state) {
-    final cubit = context.read<AppCubitCubit>();
-    return Switch(
-      value: state.themeMode == ThemeMode.dark,
-      onChanged: (value) {
-        cubit.toggleTheme();
-      },
-    );
-  },
-),
-
+                    builder: (context, state) {
+                      final cubit = context.read<AppCubitCubit>();
+                      return Switch(
+                        value: state.themeMode == ThemeMode.dark,
+                        onChanged: (value) {
+                          cubit.toggleTheme();
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
               Divider(indent: 5, endIndent: 10),
@@ -152,20 +150,24 @@ SwitchButton(
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Icon(Icons.logout, color: Colors.red),
-                      SizedBox(width: 10),
-                      Text(
-                        'Log Out',
-                        style: AppStyls.textStyle17.copyWith(fontSize: 13),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () async {
+                      SharedPreferenceManager.clearToken();
+                      Restart.restartApp();
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout, color: Colors.red),
+                        SizedBox(width: 10),
+                        Text(
+                          'Log Out',
+                          style: AppStyls.textStyle17.copyWith(fontSize: 13),
+                        ),
+                      ],
+                    ),
                   ),
-                  CircleArrowButton(onPressed: () {}),
                 ],
               ),
-             
             ],
           ),
         ],

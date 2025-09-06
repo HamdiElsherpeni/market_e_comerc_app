@@ -2,16 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
-import 'package:market_e_comerc_app/core/widgets/coustem_circle_avatar.dart';
+import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_image.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/menu_widget.dart';
 
-class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key, required this.name});
-  final String name;
+class MenuScreen extends StatefulWidget {
+  const MenuScreen({super.key});
+
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+  String? name;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
+  }
+
+  void loadUserData() async {
+    name = await SharedPreferenceManager.getName();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-        final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       children: [
@@ -33,13 +51,16 @@ class MenuScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Wellcome,',
+                          'Welcome,',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
-                        Text('$name', style: TextStyle(color: Colors.black)),
+                        Text(
+                          name ?? "Guest",
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ],
                     ),
                   ],
@@ -51,7 +72,7 @@ class MenuScreen extends StatelessWidget {
                   icon: Icon(
                     FontAwesomeIcons.close,
                     size: 20,
-                    fontWeight: FontWeight.w300,
+                    // مفيش fontWeight للـ Icon، دي تخص النصوص فقط
                   ),
                 ),
               ],
@@ -83,12 +104,11 @@ class MenuScreen extends StatelessWidget {
                 text: 'Account Settings',
               ),
               SizedBox(height: 10),
-               MenuWidget(
+              MenuWidget(
                 icon: Icon(Icons.support_agent_outlined, size: 15),
                 text: 'Support',
               ),
               SizedBox(height: 10),
-
             ],
           ),
         ),

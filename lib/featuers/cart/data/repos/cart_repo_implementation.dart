@@ -17,6 +17,7 @@ class CartRepoImplementation extends CartRepo {
   }) async {
     try {
       var response = await cartServices.addToCart(productId: productId);
+
       return right(response);
     } on Exception catch (e) {
       if (e is DioException) {
@@ -44,14 +45,17 @@ class CartRepoImplementation extends CartRepo {
   }
 
   @override
-  Future<Either<ServerFailler, List<GetCartResponse>>> futureGetCartProduct() async{
-   try {
-  var rsponse=await cartServices.getCart();
-   List<GetCartResponse> proudct = [];
-      // for (var element in rsponse['']) {
-      //   proudct.add(GetCartResponse.fromJson(element));
-      // }
-      return right(proudct);
+  Future<Either<ServerFailler, List<GetCartResponse>>>
+  futureGetCartProduct() async {
+    try {
+      var response = await cartServices.getCart(); // هنا هترجع Map من السيرفس
+      List<GetCartResponse> products = [];
+
+      for (var element in response['list']) {
+        products.add(GetCartResponse.fromJson(element));
+      }
+
+      return right(products);
     } on Exception catch (e) {
       if (e is DioException) {
         return left(ServerFailler.fromDioError(e));
@@ -59,6 +63,5 @@ class CartRepoImplementation extends CartRepo {
         return left(ServerFailler(e.toString()));
       }
     }
-
   }
 }
