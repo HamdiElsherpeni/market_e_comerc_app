@@ -5,10 +5,10 @@ class SwitchButton extends StatelessWidget {
   final Function(bool) onChanged;
 
   const SwitchButton({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class SwitchButton extends StatelessWidget {
         child: Switch(
           value: value,
           onChanged: onChanged,
-          activeColor: Colors.blue,
+          activeThumbColor: Colors.blue,
           inactiveThumbColor: Colors.grey,
         ),
       ),

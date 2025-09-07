@@ -47,14 +47,14 @@ class ServicesFavi {
     return DeletFaviResponse.fromJson(response.data);
   }
 
-    Future<Map<String, dynamic>> getFavi() async {
+   Future<dynamic> getFavi() async {
     final token = await SharedPreferenceManager.getToken();
-    var headers = {
+    final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    var response = await _dio.request(
+    final response = await _dio.request(
       ApiConstant.getFavorite,
       options: Options(
         method: 'GET',
@@ -62,8 +62,20 @@ class ServicesFavi {
       ),
     );
 
-    // هنا بنحوّل الـ List من الـ API لليست من GetCartResponse
-    return (response.data );}
-       
-
+    if (response.statusCode == 200) {
+      final data = response.data;
+      // لو النص مستلم كسلسلة نصية -> حاول نفكه
+      if (data is String) {
+        try {
+          return jsonDecode(data);
+        } catch (e) {
+          throw Exception('Failed to parse favorites response string');
+        }
+      }
+      // عادة Dio يرجع Map أو List
+      return data;
+    } else {
+      throw Exception(response.statusMessage ?? 'Failed to fetch favorites');
+    }
+  }
 }

@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_e_comerc_app/constant.dart';
 import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_search_contaner.dart';
-import 'package:market_e_comerc_app/featuers/cart/presentation/view/cart_view.dart';
-import 'package:market_e_comerc_app/featuers/favorite/presentation/view/favorite_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/barnds_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/best_for_you_list.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/category_list_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/coustem_app_bar_home_view.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/head_list.dart';
-import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/list_view_offers.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/offers_widgwt.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/popular_product_list_view.dart';
-import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/coustem_text_form_feaild.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -58,7 +52,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     SizedBox(height: 180, child: PopularProductListView()),
                     SizedBox(height: 9),
                     HeadList(
-                      headName: 'Category',
+                      headName: 'Brands',
                       onPressed: () {
                         GoRouter.of(context).push(AppRouter.KCtegory);
                       },
@@ -74,7 +68,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     SizedBox(height: 180, child: BestForYouList()),
                     SizedBox(height: 2),
                     HeadList(
-                      headName: 'Brands',
+                      headName: 'Categories',
                       onPressed: () {
                         GoRouter.of(context).push(AppRouter.KBrands);
                       },

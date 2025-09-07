@@ -9,7 +9,7 @@ import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/cous
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/coutem_app_bar_forget.dart';
 
 class CreateNewPassView extends StatefulWidget {
-  CreateNewPassView({super.key, required this.email});
+  const CreateNewPassView({super.key, required this.email});
   final String email;
   @override
   State<CreateNewPassView> createState() => _CreateNewPassViewState();

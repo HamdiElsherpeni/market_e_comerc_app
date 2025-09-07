@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_e_comerc_app/core/widgets/proudct_abb_bar.dart';
@@ -6,7 +8,6 @@ import 'package:market_e_comerc_app/featuers/cart/presentation/view/widgets/cart
 import 'package:market_e_comerc_app/featuers/cart/presentation/view/widgets/cart_list_view.dart';
 
 import '../../../../../core/widgets/coustem_feature_failler.dart';
-import '../../../../../core/widgets/coustem_loading_indecator.dart';
 import '../../../../../core/widgets/coustem_search_contaner.dart';
 
 class CartViewBody extends StatefulWidget {
@@ -22,25 +23,37 @@ class _CartViewBodyState extends State<CartViewBody> {
     return BlocBuilder<GetProductCubitCubit, GetProductCubitState>(
       builder: (context, state) {
         if (state is GetProductCubitSucess) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              children: [
-                ProudctAbbBar(titel: 'Cart'),
-                SizedBox(height: 10,),
+          return RefreshIndicator(
+            onRefresh: () {
+              return BlocProvider.of<GetProductCubitCubit>(
+                context,
+              ).GetProduct();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Column(
+                children: [
+                  ProudctAbbBar(titel: 'Cart'),
+                  SizedBox(height: 10),
 
-                CoustemSearchContaner(),
-                SizedBox(height: 10,),
-            
-                Expanded(child: CartListView(getCartResponse: state.getProducts,)),
-              ],
+                  CoustemSearchContaner(),
+                  SizedBox(height: 10),
+
+                  Expanded(
+                    child: CartListView(getCartResponse: state.getProducts),
+                  ),
+                ],
+              ),
             ),
           );
         } else if (state is GetProductCubitFailer) {
           return CoustemFeatureFailler(errorMassge: state.errorMassge);
-        } else  {
+        } else if(state is GetProductCubitLoading) {
           return CartEmpity();
-        } 
+        }
+        else {
+          return const Text('');
+        }
       },
     );
   }

@@ -24,7 +24,7 @@ class ProudctAbbBar extends StatelessWidget {
           },
         ),
         SizedBox(width: 20),
-        Text("$titel", style: AppStyls.textStyle17),
+        Text(titel, style: AppStyls.textStyle17),
         SizedBox(width: 20),
         CoustemCircleImage(urlImage: urlImage ?? AppAssets.hamdi),
       ],

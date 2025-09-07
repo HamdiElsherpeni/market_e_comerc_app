@@ -8,6 +8,82 @@ class SharedPreferenceManager {
   static const String _userId = 'user_id';
   static const String _localeKey = 'app_locale';
   static const String _themeKey = 'app_theme';
+  static const String _gender = 'gender';
+  static const String _type = 'type';
+  static const String _address = 'adress';
+  static const String _phone = 'phone';
+
+  static Future<void> savePhone(String phone) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_phone, phone);
+    print('[DEBUG] Saved email: $phone');
+  }
+
+  static Future<String?> getPhone() async {
+    final prefs = await SharedPreferences.getInstance();
+    final phone = prefs.getString(_phone);
+    print('[DEBUG] Loaded email: $phone');
+    return phone;
+  }
+
+  static Future<void> clearPhone() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_phone);
+  }
+
+  static Future<void> saveType(String type) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_type, type);
+    print('[DEBUG] Saved email: $type');
+  }
+
+  static Future<String?> getType() async {
+    final prefs = await SharedPreferences.getInstance();
+    final type = prefs.getString(_type);
+    print('[DEBUG] Loaded email: $type');
+    return type;
+  }
+
+  static Future<void> clearType() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_type);
+  }
+
+  static Future<void> saveGender(String gender) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_gender, gender);
+    print('[DEBUG] Saved email: $gender');
+  }
+
+  static Future<String?> getGender() async {
+    final prefs = await SharedPreferences.getInstance();
+    final gender = prefs.getString(_gender);
+    print('[DEBUG] Loaded email: $gender');
+    return gender;
+  }
+
+  static Future<void> clearGender() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_gender);
+  }
+
+  static Future<void> saveAddress(String address) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_address, address);
+    print('[DEBUG] Saved email: $address');
+  }
+
+  static Future<String?> getAdress() async {
+    final prefs = await SharedPreferences.getInstance();
+    final address = prefs.getString(_address);
+    print('[DEBUG] Loaded email: $address');
+    return address;
+  }
+
+  static Future<void> clearAdress() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_address);
+  }
 
   static Future<void> saveUserName(String userName) async {
     final prefs = await SharedPreferences.getInstance();

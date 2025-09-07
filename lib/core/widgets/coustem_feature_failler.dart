@@ -3,7 +3,7 @@ import 'package:market_e_comerc_app/core/utlis/app_styls.dart';
 
 
 class CoustemFeatureFailler extends StatelessWidget {
-   CoustemFeatureFailler({super.key, required this.errorMassge});
+   const CoustemFeatureFailler({super.key, required this.errorMassge});
 final String errorMassge;
   @override
   Widget build(BuildContext context) {

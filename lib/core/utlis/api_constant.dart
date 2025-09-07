@@ -18,7 +18,7 @@ class ApiConstant {
   static const String getCarrt = '${_baseUrl}user/getCart';
   static const String addCart = '${_baseUrl}user/addCart';
   static const String deletCart = '${_baseUrl}user/deleteCart';
-  static const String getFavorite = '{${_baseUrl}ser/getFavorite';
+  static const String getFavorite = '${_baseUrl}user/getFavorite';
   static const String addFavorite = '${_baseUrl}user/addFavorite';
   static const String deletFavorite = '${_baseUrl}user/deleteFavorite';
   static const String addRate = '${_baseUrl}user/addRate';

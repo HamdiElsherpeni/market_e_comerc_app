@@ -26,7 +26,7 @@ import '../../data/repos/top_search_repo/top_search_implement.dart';
 import '../manger_model/top_search/top_search_cubit.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -93,13 +93,14 @@ class _HomeViewState extends State<HomeView> {
         body: _screens[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
+          backgroundColor: Colors.white,
           selectedItemColor: KprimaryColor,
           unselectedItemColor: Colors.grey,
           onTap: _onItemTapped,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
-              label: "Home",
+              label: ' Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart_outlined),

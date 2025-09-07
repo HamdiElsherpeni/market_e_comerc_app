@@ -4,7 +4,6 @@ import 'package:market_e_comerc_app/featuers/cart/data/models/delet_product_mode
 import 'package:market_e_comerc_app/featuers/cart/data/models/get_cart/get_cart_response.dart';
 
 import '../../../../core/err/faire.dart';
-import '../../../home/data/models/prands_model/brands.model.dart';
 
 abstract class CartRepo {
   Future<Either<ServerFailler, AddToCartResponse>> futureAddProduct({

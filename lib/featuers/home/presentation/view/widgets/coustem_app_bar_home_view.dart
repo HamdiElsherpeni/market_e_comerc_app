@@ -6,7 +6,7 @@ import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_image.dart';
 
 class CoustemAppBarHomeView extends StatelessWidget {
-  CoustemAppBarHomeView({super.key, this.urlImage});
+  const CoustemAppBarHomeView({super.key, this.urlImage});
   final String? urlImage;
 
   @override

@@ -14,6 +14,7 @@ import 'package:market_e_comerc_app/featuers/favorite/data/repos/favi_repo_impel
 import 'package:market_e_comerc_app/featuers/favorite/data/services_favi/services_favi.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/manger/add_favi_cubit/add_favi_cubit.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/manger/delet_favi_cubit/delete_fvie_cubit.dart';
+import 'package:market_e_comerc_app/featuers/favorite/presentation/manger/get_favi_cubit/get_favi_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AppCubitCubit()),
         BlocProvider(
           create: (context) =>
-              GetProductCubitCubit(CartRepoImplementation(CartServices())),
+              GetProductCubitCubit(CartRepoImplementation(CartServices()))
+                ..GetProduct(),
         ),
         BlocProvider(
           create: (context) =>
@@ -41,6 +43,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               DeletProudcutCubitCubit(CartRepoImplementation(CartServices())),
+        ),
+        BlocProvider(
+          create: (context) => GetFaviCubit(FaviRepoImpelment(ServicesFavi())),
         ),
         BlocProvider(
           create: (context) => AddFaviCubit(FaviRepoImpelment(ServicesFavi())),
@@ -55,7 +60,9 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             routerConfig: AppRouter.router,
             debugShowCheckedModeBanner: false,
-            theme: ThemeData.light(),
+            theme: ThemeData.light().copyWith(
+              scaffoldBackgroundColor: Colors.white,
+            ),
             darkTheme: ThemeData.dark().copyWith(
               scaffoldBackgroundColor: Colors.black,
 

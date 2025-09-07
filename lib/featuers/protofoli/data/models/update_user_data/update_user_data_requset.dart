@@ -1,12 +1,12 @@
-// lib/featuers/user/data/models/update_user_request.dart
+// lib/featuers/protofoli/data/models/update_user_data/update_user_request.dart
 class UpdateUserRequest {
-  final String name;
-  final String email;
-  final String gender;
-  final String image;
-  final String type;
-  final String address;
-  final String phone;
+  String name;
+  String email;
+  String gender;
+  String image;
+  String type;
+  String address;
+  String phone;
 
   UpdateUserRequest({
     required this.name,
@@ -18,7 +18,6 @@ class UpdateUserRequest {
     required this.phone,
   });
 
-  /// تحويل من JSON → Dart Object
   factory UpdateUserRequest.fromJson(Map<String, dynamic> json) {
     return UpdateUserRequest(
       name: json['name'] ?? '',
@@ -31,16 +30,15 @@ class UpdateUserRequest {
     );
   }
 
-  /// تحويل من Dart Object → JSON (لاستخدامه مع Dio)
   Map<String, dynamic> toJson() {
     return {
-      "name": name,
-      "email": email,
-      "gender": gender,
-      "image": image,
-      "type": type,
-      "address": address,
-      "phone": phone,
+      'name': name,
+      'email': email,
+      'gender': gender,
+      'image': image,
+      'type': type,
+      'address': address,
+      'phone': phone,
     };
   }
 }

@@ -10,14 +10,14 @@ import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/w
 import 'package:market_e_comerc_app/featuers/on_bording_view/presentation/view/widgets/screan_two.dart';
 
 class OnBordingViewBody extends StatefulWidget {
-  OnBordingViewBody({super.key});
+  const OnBordingViewBody({super.key});
 
   @override
   State<OnBordingViewBody> createState() => _OnBordingViewBodyState();
 }
 
 class _OnBordingViewBodyState extends State<OnBordingViewBody> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
 
   int index = 0;
 

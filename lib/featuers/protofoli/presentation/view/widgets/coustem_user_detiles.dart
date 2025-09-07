@@ -2,6 +2,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/coustem_profile_image.dart';
 
 import '../../../../../core/utlis/app_assets.dart';
@@ -22,8 +24,8 @@ class CoustemUserDetiles extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
 
-        String? name = snapshot.data![0] as String?;
-        String? userName = snapshot.data![1] as String?;
+        String? name = snapshot.data![0];
+        String? userName = snapshot.data![1];
 
         return SizedBox(
           height: 200,
@@ -40,7 +42,11 @@ class CoustemUserDetiles extends StatelessWidget {
                       backgroundColor: Colors.white,
                       radius: 12,
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+
+                      GoRouter.of(context).push(AppRouter.KEditUserData);
+
+                        },
                         icon: Icon(Icons.edit, size: 10),
                       ),
                     ),

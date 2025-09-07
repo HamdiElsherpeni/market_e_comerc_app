@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_image.dart';
 import 'package:market_e_comerc_app/featuers/protofoli/presentation/view/widgets/menu_widget.dart';
@@ -102,6 +103,9 @@ class _MenuScreenState extends State<MenuScreen> {
               MenuWidget(
                 icon: Icon(Icons.settings_outlined, size: 15),
                 text: 'Account Settings',
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.KMyProfile);
+                },
               ),
               SizedBox(height: 10),
               MenuWidget(

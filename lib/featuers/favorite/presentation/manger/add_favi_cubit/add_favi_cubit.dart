@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:market_e_comerc_app/featuers/favorite/data/models/add_favi/add_favi_response.dart';
 import 'package:market_e_comerc_app/featuers/favorite/data/repos/favi_repo.dart';
-import 'package:market_e_comerc_app/featuers/favorite/data/services_favi/services_favi.dart';
 
 part 'add_favi_state.dart';
 

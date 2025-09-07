@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import 'location_product.dart';
 
 class Location extends Equatable {
 	final Location? location;

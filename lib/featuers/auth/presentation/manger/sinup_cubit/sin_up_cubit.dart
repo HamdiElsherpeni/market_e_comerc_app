@@ -1,8 +1,5 @@
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
-import 'package:market_e_comerc_app/core/utlis/api_constant.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/models/sinup_models/sin_uo_response.dart';
 import 'package:market_e_comerc_app/featuers/auth/data/repos/sinup_repo/sinup_repo.dart';
 import 'package:meta/meta.dart';

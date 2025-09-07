@@ -65,8 +65,9 @@ class ForgetPassBodyEmail extends StatelessWidget {
                         txtHint: 'You@gmail.com',
                         controller: _emailControler,
                         validator: (val) {
-                          if (val == null || val.isEmpty)
+                          if (val == null || val.isEmpty) {
                             return "Enter your email";
+                          }
                           if (!val.contains("@")) return "Enter valid email";
                           return null;
                         },

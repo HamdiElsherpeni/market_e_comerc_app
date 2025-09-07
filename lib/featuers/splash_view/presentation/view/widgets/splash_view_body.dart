@@ -26,6 +26,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   });
 }
 
+  @override
   Widget build(BuildContext context) {
     return Center(child: Image.asset(AppAssets.logoSplash));
   }

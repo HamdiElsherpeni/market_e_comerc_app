@@ -163,6 +163,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text(" تم التسجيل بنجاح  ✅")),
                   );
+                 
                   GoRouter.of(context).pushReplacement(AppRouter.KHomeView);
                 } else if (state is SinInFailer) {
                   ScaffoldMessenger.of(context).showSnackBar(

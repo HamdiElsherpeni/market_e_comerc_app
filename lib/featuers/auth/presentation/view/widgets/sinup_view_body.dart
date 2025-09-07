@@ -4,10 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_e_comerc_app/core/utlis/app_assets.dart';
 import 'package:market_e_comerc_app/core/utlis/app_router.dart';
-import 'package:market_e_comerc_app/core/utlis/shared_preferences.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_circle_avatar.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_elveted_boutten.dart';
-import 'package:market_e_comerc_app/featuers/auth/data/services/auth_services.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/manger/sinup_cubit/sin_up_cubit.dart';
 import 'package:market_e_comerc_app/featuers/auth/presentation/view/widgets/coustem_text_form_feaild.dart';
 

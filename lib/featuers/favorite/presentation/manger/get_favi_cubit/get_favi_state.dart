@@ -1,3 +1,4 @@
+// part of 'get_favi_cubit.dart';
 part of 'get_favi_cubit.dart';
 
 sealed class GetFaviState extends Equatable {
@@ -12,11 +13,16 @@ final class GetFaviLoading extends GetFaviState {}
 final class GetFaviFailer extends GetFaviState {
   final String errorMassge;
 
- const GetFaviFailer(this.errorMassge);
+  const GetFaviFailer(this.errorMassge);
+
+  @override
+  List<Object> get props => [errorMassge];
 }
 final class GetFaviSucsess extends GetFaviState {
-    final List<GetFaviResponse> getFavi;
+  final List<GetFaviResponse> getFavi;
 
-const  GetFaviSucsess(this.getFavi);
+  const GetFaviSucsess(this.getFavi);
+
+  @override
+  List<Object> get props => [getFavi];
 }
-

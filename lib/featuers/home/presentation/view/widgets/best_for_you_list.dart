@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/core/widgets/coustem_loading_indecator.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/manger/delet_favi_cubit/delete_fvie_cubit.dart';
 import 'package:market_e_comerc_app/featuers/home/presentation/manger_model/top_search/top_search_cubit.dart';
@@ -7,21 +9,13 @@ import 'package:market_e_comerc_app/featuers/home/presentation/view/widgets/cous
 import 'package:market_e_comerc_app/featuers/cart/presentation/manger/add_product_cubit/add_product_cubit_cubit.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/manger/delet_product_cubit/delet_proudcut_cubit_cubit.dart';
 import 'package:market_e_comerc_app/featuers/favorite/presentation/manger/add_favi_cubit/add_favi_cubit.dart';
+import 'package:market_e_comerc_app/featuers/cart/presentation/manger/get_product_cubit/get_product_cubit_cubit.dart';
+import 'package:market_e_comerc_app/featuers/favorite/presentation/manger/get_favi_cubit/get_favi_cubit.dart';
+
 import '../../../../../core/widgets/coustem_feature_failler.dart';
 
-class BestForYouList extends StatefulWidget {
+class BestForYouList extends StatelessWidget {
   const BestForYouList({super.key});
-
-  @override
-  State<BestForYouList> createState() => _BestForYouListState();
-}
-
-class _BestForYouListState extends State<BestForYouList> {
-  // حالة كل عنصر
-  final Map<String, bool> _isAdded = {};
-  final Map<String, bool> _isLoading = {};
-  final Map<String, bool> _isFavorite = {};
-  final Map<String, bool> _isFavoriteLoading = {};
 
   @override
   Widget build(BuildContext context) {
@@ -37,93 +31,49 @@ class _BestForYouListState extends State<BestForYouList> {
               final product = products[index];
               final productId = product.id ?? '';
 
-              // تهيئة افتراضية للحالات
-              _isAdded.putIfAbsent(productId, () => false);
-              _isLoading.putIfAbsent(productId, () => false);
-              _isFavorite.putIfAbsent(productId, () => false);
-              _isFavoriteLoading.putIfAbsent(productId, () => false);
-
               return Padding(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: MultiBlocListener(
                   listeners: [
+                    // Add to cart
                     BlocListener<AddProductCubitCubit, AddProductCubitState>(
                       listener: (context, addState) {
-                        if (addState is AddProductCubitLoading &&
+                        if (addState is AddProductCubitFailer &&
                             addState.productId == productId) {
-                          setState(() => _isLoading[productId] = true);
-                        } else if (addState is AddProductCubitSucsess &&
-                            addState.productId == productId) {
-                          setState(() {
-                            _isAdded[productId] = true;
-                            _isLoading[productId] = false;
-                          });
-                        } else if (addState is AddProductCubitFailer &&
-                            addState.productId == productId) {
-                          setState(() => _isLoading[productId] = false);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(addState.errorMassge)),
                           );
                         }
                       },
                     ),
-                    BlocListener<
-                      DeletProudcutCubitCubit,
-                      DeletProudcutCubitState
-                    >(
+                    // Delete from cart
+                    BlocListener<DeletProudcutCubitCubit,
+                        DeletProudcutCubitState>(
                       listener: (context, delState) {
-                        if (delState is DeletProudcutCubitLoading &&
+                        if (delState is DeletProudcutCubitFailer &&
                             delState.productId == productId) {
-                          setState(() => _isLoading[productId] = true);
-                        } else if (delState is DeletProudcutCubitSucsess &&
-                            delState.productId == productId) {
-                          setState(() {
-                            _isAdded[productId] = false;
-                            _isLoading[productId] = false;
-                          });
-                        } else if (delState is DeletProudcutCubitFailer &&
-                            delState.productId == productId) {
-                          setState(() => _isLoading[productId] = false);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(delState.errorMassge)),
                           );
                         }
                       },
                     ),
+                    // Add favorite
                     BlocListener<AddFaviCubit, AddFaviState>(
                       listener: (context, favState) {
-                        if (favState is AddFaviLoading &&
+                        if (favState is AddFaviFailer &&
                             favState.productId == productId) {
-                          setState(() => _isFavoriteLoading[productId] = true);
-                        } else if (favState is AddFaviSucess &&
-                            favState.productId == productId) {
-                          setState(() {
-                            _isFavorite[productId] = true;
-                            _isFavoriteLoading[productId] = false;
-                          });
-                        } else if (favState is AddFaviFailer &&
-                            favState.productId == productId) {
-                          setState(() => _isFavoriteLoading[productId] = false);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(favState.errorMassge)),
                           );
                         }
                       },
                     ),
+                    // Delete favorite
                     BlocListener<DeleteFvieCubit, DeleteFvieState>(
                       listener: (context, delFavState) {
-                        if (delFavState is DeleteFvieLoading &&
+                        if (delFavState is DeleteFvieFailer &&
                             delFavState.productId == productId) {
-                          setState(() => _isFavoriteLoading[productId] = true);
-                        } else if (delFavState is DeleteFvieSucess &&
-                            delFavState.productId == productId) {
-                          setState(() {
-                            _isFavorite[productId] = false;
-                            _isFavoriteLoading[productId] = false;
-                          });
-                        } else if (delFavState is DeleteFvieFailer &&
-                            delFavState.productId == productId) {
-                          setState(() => _isFavoriteLoading[productId] = false);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(delFavState.errorMassge)),
                           );
@@ -131,36 +81,87 @@ class _BestForYouListState extends State<BestForYouList> {
                       },
                     ),
                   ],
-                  child: CoustemProdectItem(
-                    image:
-                        'https://tse1.mm.bing.net/th/id/OIP.j1sMPSP-emIbWhpgbf50zQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
-                    name: '',
-                    price: product.number ?? 0,
-                    id: productId,
-                    isAdded: _isAdded[productId]!,
-                    isLoading: _isLoading[productId]!,
-                    isFavorite: _isFavorite[productId]!,
-                    onPressed: () {
-                      if (!_isAdded[productId]!) {
-                        context.read<AddProductCubitCubit>().addProduct(
-                          productId: productId,
-                        );
-                      } else {
-                        context.read<DeletProudcutCubitCubit>().deletProduct(
-                          productId: productId,
-                        );
+                  child: BlocBuilder<GetProductCubitCubit,
+                      GetProductCubitState>(
+                    builder: (context, cartState) {
+                      bool isAdded = false;
+                      int quantity = 1;
+                      if (cartState is GetProductCubitSucess) {
+                        final exists = cartState.getProducts
+                            .any((p) => p.id == productId);
+                        isAdded = exists;
                       }
-                    },
-                    onFavoritePressed: () {
-                      if (!_isFavorite[productId]!) {
-                        context.read<AddFaviCubit>().addFaviProduct(
-                          productId: productId,
-                        );
-                      } else {
-                        context.read<DeleteFvieCubit>().deletFaviProduct(
-                          productId: productId,
-                        );
-                      }
+
+                      return BlocBuilder<GetFaviCubit, GetFaviState>(
+                        builder: (context, faviState) {
+                          bool isFavorite = false;
+                          if (faviState is GetFaviSucsess) {
+                            isFavorite = faviState.getFavi
+                                    .any((p) => p.id == productId) ??
+                                false;
+                          }
+
+                          return BlocBuilder<AddProductCubitCubit,
+                              AddProductCubitState>(
+                            builder: (context, addState) {
+                              final isLoading = addState
+                                      is AddProductCubitLoading &&
+                                  addState.productId == productId;
+
+                              return CoustemProdectItem(
+                                image:
+                                    'https://tse4.mm.bing.net/th/id/OIP.YOk5SbNmSZSU7POZ-tA78AHaHa?cb=ucfimg2ucfimg=1&w=980&h=980&rs=1&pid=ImgDetMain&o=7&rm=3',
+                                name:  '',
+                                price: 0,
+                                id: productId,
+                                isAdded: isAdded,
+                                isLoading: isLoading,
+                                isFavorite: isFavorite,
+                                onPressed: () {
+                                  if (!isAdded) {
+                                    context
+                                        .read<AddProductCubitCubit>()
+                                        .addProduct(productId: productId);
+                                  } else {
+                                    context
+                                        .read<DeletProudcutCubitCubit>()
+                                        .deletProduct(productId: productId);
+                                  }
+                                },
+                                onFavoritePressed: () {
+                                  if (!isFavorite) {
+                                    context
+                                        .read<AddFaviCubit>()
+                                        .addFaviProduct(productId: productId);
+                                  } else {
+                                    context
+                                        .read<DeleteFvieCubit>()
+                                        .deletFaviProduct(productId: productId);
+                                  }
+                                },
+                                onTabProductDetiels: () {
+                                  GoRouter.of(context).push(
+                                    AppRouter.KDeteliesPage,
+                                    extra: product,
+                                  );
+                                },
+                                quantity: quantity,
+                                onIncrement: () {
+                                  // ممكن تستخدم Cubit خاص للكمية هنا
+                                },
+                                onDecrement: () {
+                                  // نفس الكلام
+                                },
+                                onRemove: () {
+                                  context
+                                      .read<DeletProudcutCubitCubit>()
+                                      .deletProduct(productId: productId);
+                                },
+                              );
+                            },
+                          );
+                        },
+                      );
                     },
                   ),
                 ),

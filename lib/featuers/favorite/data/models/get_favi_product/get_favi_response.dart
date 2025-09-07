@@ -1,3 +1,4 @@
+// lib/featuers/favorite/data/models/get_favi_product/get_favi_response.dart
 class GetFaviResponse {
   final String id;
   final String title;
@@ -35,21 +36,21 @@ class GetFaviResponse {
 
   factory GetFaviResponse.fromJson(Map<String, dynamic> json) {
     return GetFaviResponse(
-      id: json["_id"],
-      title: json["title"],
-      price: json["price"],
-      description: json["description"],
-      images: List<String>.from(json["images"]),
-      rating: (json["rating"] as num).toDouble(),
-      discount: json["discount"],
-      remain: json["remain"],
-      sold: json["sold"],
-      category: json["category"],
-      brand: json["brand"],
-      location: LocationData.fromJson(json["location"]),
-      createdAt: DateTime.parse(json["createdAt"]),
-      updatedAt: DateTime.parse(json["updatedAt"]),
-      v: json["__v"],
+      id: json["_id"]?.toString() ?? '',
+      title: json["title"]?.toString() ?? '',
+      price: (json["price"] is num) ? (json["price"] as num).toInt() : int.tryParse(json["price"]?.toString() ?? '0') ?? 0,
+      description: json["description"]?.toString() ?? '',
+      images: (json["images"] is List) ? List<String>.from((json["images"] as List).map((x) => x?.toString() ?? '')) : [],
+      rating: (json["rating"] is num) ? (json["rating"] as num).toDouble() : double.tryParse(json["rating"]?.toString() ?? '0') ?? 0.0,
+      discount: (json["discount"] is num) ? (json["discount"] as num).toInt() : int.tryParse(json["discount"]?.toString() ?? '0') ?? 0,
+      remain: (json["remain"] is num) ? (json["remain"] as num).toInt() : int.tryParse(json["remain"]?.toString() ?? '0') ?? 0,
+      sold: (json["sold"] is num) ? (json["sold"] as num).toInt() : int.tryParse(json["sold"]?.toString() ?? '0') ?? 0,
+      category: json["category"]?.toString() ?? '',
+      brand: json["brand"]?.toString() ?? '',
+      location: json["location"] is Map ? LocationData.fromJson(json["location"]) : LocationData(location: Location(type: '', coordinates: []), name: ''),
+      createdAt: DateTime.tryParse(json["createdAt"]?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0),
+      updatedAt: DateTime.tryParse(json["updatedAt"]?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0),
+      v: (json["__v"] is num) ? (json["__v"] as num).toInt() : int.tryParse(json["__v"]?.toString() ?? '0') ?? 0,
     );
   }
 
@@ -85,8 +86,8 @@ class LocationData {
 
   factory LocationData.fromJson(Map<String, dynamic> json) {
     return LocationData(
-      location: Location.fromJson(json["location"]),
-      name: json["name"],
+      location: json["location"] is Map ? Location.fromJson(json["location"]) : Location(type: '', coordinates: []),
+      name: json["name"]?.toString() ?? '',
     );
   }
 
@@ -108,9 +109,20 @@ class Location {
   });
 
   factory Location.fromJson(Map<String, dynamic> json) {
+    final coords = <double>[];
+    if (json["coordinates"] is List) {
+      for (var x in json["coordinates"]) {
+        if (x is num) {
+          coords.add((x).toDouble());
+        } else {
+          final parsed = double.tryParse(x?.toString() ?? '');
+          if (parsed != null) coords.add(parsed);
+        }
+      }
+    }
     return Location(
-      type: json["type"],
-      coordinates: List<double>.from(json["coordinates"].map((x) => (x as num).toDouble())),
+      type: json["type"]?.toString() ?? '',
+      coordinates: coords,
     );
   }
 

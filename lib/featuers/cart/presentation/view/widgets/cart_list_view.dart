@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:market_e_comerc_app/core/utlis/app_router.dart';
 import 'package:market_e_comerc_app/featuers/cart/data/models/get_cart/get_cart_response.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/manger/delet_product_cubit/delet_proudcut_cubit_cubit.dart';
 import 'package:market_e_comerc_app/featuers/cart/presentation/view/widgets/coustem_product_item_cart.dart';
@@ -14,26 +16,22 @@ class CartListView extends StatefulWidget {
 }
 
 class _CartListViewState extends State<CartListView> {
-  late List<GetCartResponse> cartItems;
-
-  // حالة كل عنصر للتحكم بالزرار خارجيًا
-  final Map<String, bool> _isRemoved = {};
+  // حالة التحميل لكل عنصر
   final Map<String, bool> _isLoading = {};
 
   @override
   void initState() {
     super.initState();
-    cartItems = List.from(widget.getCartResponse);
-
-    // تهيئة الحالة لكل عنصر (الحالة الأساسية Remove)
-    for (var item in cartItems) {
-      _isRemoved[item.id] = false;
+    // تهيئة حالة التحميل لكل عنصر من الليست المستلمة
+    for (var item in widget.getCartResponse) {
       _isLoading[item.id] = false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final cartItems = widget.getCartResponse;
+
     if (cartItems.isEmpty) {
       return const Center(child: Text("Cart is empty"));
     }
@@ -50,10 +48,6 @@ class _CartListViewState extends State<CartListView> {
       itemBuilder: (context, index) {
         final item = cartItems[index];
 
-        // تهيئة الحالة إذا كانت غير موجودة
-        _isRemoved.putIfAbsent(item.id, () => false);
-        _isLoading.putIfAbsent(item.id, () => false);
-
         return BlocListener<DeletProudcutCubitCubit, DeletProudcutCubitState>(
           listener: (context, state) {
             if (state is DeletProudcutCubitLoading &&
@@ -62,33 +56,36 @@ class _CartListViewState extends State<CartListView> {
             } else if (state is DeletProudcutCubitSucsess &&
                 state.productId == item.id) {
               setState(() {
+                // حذف العنصر مباشرة من الليست المستلمة
                 cartItems.removeWhere((element) => element.id == item.id);
-                _isRemoved.remove(item.id);
                 _isLoading.remove(item.id);
               });
             } else if (state is DeletProudcutCubitFailer &&
                 state.productId == item.id) {
               setState(() => _isLoading[item.id] = false);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errorMassge)),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorMassge)));
             }
           },
           child: CoustemProductItemCart(
-            image: item.images[0],
+            key: ValueKey(item.id), // لتجنب إعادة استخدام العناصر
+            image: item.images.isNotEmpty ? item.images[0] : '',
             name: item.title,
             price: item.price,
-            isAdded: _isRemoved[item.id]!,
+            isAdded: false,
             isLoading: _isLoading[item.id]!,
             onPressed: () {
-              if (!_isRemoved[item.id]!) {
-                context
-                    .read<DeletProudcutCubitCubit>()
-                    .deletProduct(productId: item.id);
-              } else {
-                // لو عايز ممكن تضيف "Add again" هنا
+              if (!_isLoading[item.id]!) {
+                context.read<DeletProudcutCubitCubit>().deletProduct(
+                  productId: item.id,
+                );
+                setState(() {});
               }
             },
+            onTap: () {},
+            isFavorite: false,
+            onFavoritePressed: () {},
           ),
         );
       },

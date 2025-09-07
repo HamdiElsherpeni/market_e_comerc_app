@@ -12,13 +12,13 @@ class CoustemElvetedBoutten extends StatelessWidget {
       height: 48,
       child: ElevatedButton(
         onPressed: onPressed ?? () {},
-        child: Text('$text', style: TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
           backgroundColor: KprimaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
         ),
+        child: Text('$text', style: TextStyle(color: Colors.white)),
       ),
     );
   }
