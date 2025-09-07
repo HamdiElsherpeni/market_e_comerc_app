@@ -21,48 +21,50 @@ class ForgetPassBody extends StatelessWidget {
           children: [
             CoutemAppBarForget(text: 'Forget Password',),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                  SizedBox(height: 30),
-                  SizedBox(
-                    height: 200,
-                    child: Image.asset(AppAssets.forgetPass),
-                  ),
-                  SizedBox(height: 20),
-                  Center(
-                    child: Text(
-                      'Please enter your phone number to\nreceive a verification code',
-                      textAlign: TextAlign.center,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                
+                  children: [
+                    SizedBox(height: 30),
+                    SizedBox(
+                      height: 200,
+                      child: Image.asset(AppAssets.forgetPass),
                     ),
-                  ),
-                  SizedBox(height: 3),
-                  Text(
-                    'Phone Number',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.left,
-                  ),
-                  CoustemTextFormFeaild(
-                    preIcon: Icon(Icons.phone_iphone_outlined),
-                    txtHint: '+20 1501142409 ',
-                  ),
-                  SizedBox(height: 18),
-                  CoustemElvetedBoutten(text: 'Sent Code'),
-                  Center(
-                    child: TextButton(
-                      onPressed: () {
-                        GoRouter.of(context).push(AppRouter.KForgetpassEmail);
-                      },
+                    SizedBox(height: 20),
+                    Center(
                       child: Text(
-                        'Try Another Way',
-                        style: TextStyle(color: KprimaryColor),
+                        'Please enter your phone number to\nreceive a verification code',
                         textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                ],
+                    SizedBox(height: 3),
+                    Text(
+                      'Phone Number',
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                    ),
+                    CoustemTextFormFeaild(
+                      preIcon: Icon(Icons.phone_iphone_outlined),
+                      txtHint: '+20 1501142409 ',
+                    ),
+                    SizedBox(height: 18),
+                    CoustemElvetedBoutten(text: 'Sent Code'),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          GoRouter.of(context).push(AppRouter.KForgetpassEmail);
+                        },
+                        child: Text(
+                          'Try Another Way',
+                          style: TextStyle(color: KprimaryColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                  ],
+                ),
               ),
             ),
           ],

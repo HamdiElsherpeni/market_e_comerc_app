@@ -83,52 +83,54 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              children: [
-                Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    SizedBox(
-                      child: CoustemProfileImage(urlImage: AppAssets.hamdi),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                _buildTextField(Icons.person, 'Name', _nameController),
-                const SizedBox(height: 15),
-                _buildTextField(Icons.email, 'Email', _emailController),
-                const SizedBox(height: 15),
-                _buildTextField(Icons.phone, 'Phone', _phoneController),
-                const SizedBox(height: 15),
-                _buildTextField(Icons.transgender, 'Gender', _genderController),
-                const SizedBox(height: 15),
-                _buildTypeDropdown(),
-                const SizedBox(height: 15),
-                _buildTextField(Icons.location_on, 'Address', _addressController),
-                const SizedBox(height: 30),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: state is UpdateUserDataLoading
-                        ? null
-                        : () {
-                            context.read<UpdateUserDataCubit>().updateDataUser(
-                                  name: _nameController.text,
-                                  email: _emailController.text,
-                                  phone: _phoneController.text,
-                                  gender: _genderController.text,
-                                  type: selectedType,
-                                  address: _addressController.text,
-                                );
-                              
-                                
-                          },
-                    child: state is UpdateUserDataLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text('Save Changes'),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      SizedBox(
+                        child: CoustemProfileImage(urlImage: AppAssets.hamdi),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 30),
+                  _buildTextField(Icons.person, 'Name', _nameController),
+                  const SizedBox(height: 15),
+                  _buildTextField(Icons.email, 'Email', _emailController),
+                  const SizedBox(height: 15),
+                  _buildTextField(Icons.phone, 'Phone', _phoneController),
+                  const SizedBox(height: 15),
+                  _buildTextField(Icons.transgender, 'Gender', _genderController),
+                  const SizedBox(height: 15),
+                  _buildTypeDropdown(),
+                  const SizedBox(height: 15),
+                  _buildTextField(Icons.location_on, 'Address', _addressController),
+                  const SizedBox(height: 30),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: state is UpdateUserDataLoading
+                          ? null
+                          : () {
+                              context.read<UpdateUserDataCubit>().updateDataUser(
+                                    name: _nameController.text,
+                                    email: _emailController.text,
+                                    phone: _phoneController.text,
+                                    gender: _genderController.text,
+                                    type: selectedType,
+                                    address: _addressController.text,
+                                  );
+                                
+                                  
+                            },
+                      child: state is UpdateUserDataLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text('Save Changes'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

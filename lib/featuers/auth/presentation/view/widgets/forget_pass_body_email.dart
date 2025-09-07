@@ -29,91 +29,93 @@ class ForgetPassBodyEmail extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-
-              children: [
-                CoutemAppBarForget(text: 'Forget Password',),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
-                    children: [
-                      SizedBox(height: 30),
-                      SizedBox(
-                        height: 200,
-                        child: Image.asset(AppAssets.forgetPass),
-                      ),
-                      SizedBox(height: 20),
-                      Center(
-                        child: Text(
-                          'Please enter your email address to\nreceive a verification code',
-                          textAlign: TextAlign.center,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+              
+                children: [
+                  CoutemAppBarForget(text: 'Forget Password',),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+              
+                      children: [
+                        SizedBox(height: 30),
+                        SizedBox(
+                          height: 200,
+                          child: Image.asset(AppAssets.forgetPass),
                         ),
-                      ),
-                      SizedBox(height: 3),
-                      Text(
-                        'Email',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            'Please enter your email address to\nreceive a verification code',
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-
-                      CoustemTextFormFeaild(
-                        preIcon: Icon(Icons.email_outlined),
-                        txtHint: 'You@gmail.com',
-                        controller: _emailControler,
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return "Enter your email";
-                          }
-                          if (!val.contains("@")) return "Enter valid email";
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 18),
-                      BlocConsumer<ResetPassCubit, ResetPassState>(
-                        listener: (context, state) {
-                          if (state is ResetPassSucsess) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(" تم التسجيل بنجاح  ✅"),
-                              ),
+                        SizedBox(height: 3),
+                        Text(
+                          'Email',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+              
+                        CoustemTextFormFeaild(
+                          preIcon: Icon(Icons.email_outlined),
+                          txtHint: 'You@gmail.com',
+                          controller: _emailControler,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return "Enter your email";
+                            }
+                            if (!val.contains("@")) return "Enter valid email";
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 18),
+                        BlocConsumer<ResetPassCubit, ResetPassState>(
+                          listener: (context, state) {
+                            if (state is ResetPassSucsess) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(" تم التسجيل بنجاح  ✅"),
+                                ),
+                              );
+                              GoRouter.of(context).pushReplacement(
+                                AppRouter.KOtpView,
+                                extra:  _emailControler.text.trim(),
+                              );
+                            } else if (state is ResetPassFalier) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(state.errorMassge),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          },
+                          builder: (context, state) {
+                            if (state is ResetPassLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return CoustemElvetedBoutten(
+                              text: 'Sent Code',
+                              onPressed: () => _resetPass(context),
                             );
-                            GoRouter.of(context).pushReplacement(
-                              AppRouter.KOtpView,
-                              extra:  _emailControler.text.trim(),
-                            );
-                          } else if (state is ResetPassFalier) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(state.errorMassge),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                          }
-                        },
-                        builder: (context, state) {
-                          if (state is ResetPassLoading) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                          return CoustemElvetedBoutten(
-                            text: 'Sent Code',
-                            onPressed: () => _resetPass(context),
-                          );
-                        },
-                      ),
-
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                      ),
-                    ],
+                          },
+                        ),
+              
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.1,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
